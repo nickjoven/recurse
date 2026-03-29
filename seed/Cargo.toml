@@ -1,0 +1,13 @@
+[package]
+name = "recurse-seed"
+version = "0.1.0"
+edition = "2021"
+description = "Seed the algebraic ontology DAG: 5 levels from primitives to predictions, ready for stellar observations"
+
+[dependencies]
+canon_d = { git = "https://github.com/nickjoven/canon.d.git" }
+ket-cas = { git = "https://github.com/nickjoven/ket.git" }
+ket-dag = { git = "https://github.com/nickjoven/ket.git" }
+serde_json = "1"
+serde = { version = "1", features = ["derive"] }
+blake3 = "1"
