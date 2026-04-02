@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 using Reloaded.Hooks.Definitions;
 using Reloaded.Mod.Interfaces;
 using Reloaded.Mod.Interfaces.Internal;
@@ -26,9 +27,12 @@ public unsafe class Mod : IMod {
     // Track last-used ability per slot for debugging/correlation
     private readonly Dictionary<int, double> _lastHotbarUseTime = new();
 
-    // Discovery mode throttle — log every N frames
+    // Frame tracking — reset _drawnThisFrame when gametime advances
     private int _frameCount;
+    private bool _drawnThisFrame;
+    private double _lastDrawGametime = -1;
     private const int DiscoveryLogInterval = 300;
+    private HashSet<string> _discoveredDrawEvents = new();
 
     public void StartEx(IModLoaderV1 loader, IModConfigV1 modConfig) {
         _rnsRef = loader.GetController<IRNSReloaded>();
@@ -153,27 +157,53 @@ public unsafe class Mod : IMod {
     private void OnExecuteIt(ExecuteItArguments args) {
         _frameCount++;
 
-        // Discovery mode: log script names periodically to help find the right hook point
-        if (_config.DiscoveryMode && _frameCount % DiscoveryLogInterval == 0) {
-            LogDiscoveryInfo();
+        // OnExecuteIt fires on EVERY GML code execution. Filter by code name
+        // to only draw during a Draw event (safe context for GM draw calls).
+        // args.Code->Name gives us e.g. "gml_Object_obj_battlecontroller_Draw_0"
+        string? codeName = null;
+        try {
+            codeName = Marshal.PtrToStringAnsi((nint)args.Code->Name);
+        } catch {
+            return;
+        }
+
+        // Discovery mode: log code names to find the right draw event
+        if (_config.DiscoveryMode) {
+            if (codeName != null && codeName.Contains("Draw") && _discoveredDrawEvents.Add(codeName)) {
+                _logger.PrintMessage($"[CooldownShapes:Discovery] Draw event: {codeName}", _logger.ColorYellowLight);
+            }
+            if (_frameCount % DiscoveryLogInterval == 0) {
+                LogDiscoveryInfo();
+            }
         }
 
         // If we have a dedicated draw hook, don't also draw from OnExecuteIt
         if (_drawHook != null) return;
 
-        // Without a hook, we draw on every OnExecuteIt call.
-        // This will fire many times per frame — use the global instance as context.
-        // A better approach is to configure DrawHookScript once you discover the right one.
-        if (_frameCount % 2 == 0) return; // throttle: draw every other call
+        // Only draw during a Draw event — look for configurable pattern or default
+        if (codeName == null) return;
+        string drawFilter = !string.IsNullOrEmpty(_config.DrawEventFilter)
+            ? _config.DrawEventFilter
+            : "Draw";
+        if (!codeName.Contains(drawFilter)) return;
 
-        if (!_rnsRef!.TryGetTarget(out var rns)) return;
-        var global = rns.GetGlobalInstance();
-        RenderCooldowns(global, global);
+        // Avoid drawing multiple times per frame if multiple draw events match
+        if (_drawnThisFrame) return;
+        _drawnThisFrame = true;
+
+        RenderCooldowns(args.Self, args.Other);
     }
 
     private void RenderCooldowns(CInstance* self, CInstance* other) {
         if (_gm == null || _reader == null) return;
         if (!_rnsRef!.TryGetTarget(out var rns)) return;
+
+        // Reset once-per-frame flag when gametime advances
+        var gt = _reader.GetGlobalDouble("gametime") ?? 0;
+        if (gt != _lastDrawGametime) {
+            _drawnThisFrame = false;
+            _lastDrawGametime = gt;
+        }
 
         _gm.BeginFrame(self, other);
 

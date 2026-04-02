@@ -97,9 +97,14 @@ public class Config : Configurable<Config> {
     // --- Hook target ---
 
     [DisplayName("Draw Hook Script")]
-    [Description("GML script name to hook for per-frame drawing. Leave empty to use OnExecuteIt with frame filter.")]
+    [Description("GML script name to hook for per-frame drawing. Leave empty to use OnExecuteIt with draw event filter.")]
     [DefaultValue("")]
     public string DrawHookScript { get; set; } = "";
+
+    [DisplayName("Draw Event Filter")]
+    [Description("Substring to match in OnExecuteIt code names for draw context. Default 'Draw' matches any Draw event. Discovery mode logs all draw events it finds.")]
+    [DefaultValue("Draw")]
+    public string DrawEventFilter { get; set; } = "Draw";
 
     // --- Debug ---
 
