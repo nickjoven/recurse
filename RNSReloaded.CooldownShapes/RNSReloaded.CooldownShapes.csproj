@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="../Reloaded.Checks.targets" Condition="Exists('../Reloaded.Checks.targets')" />
+  <Import Project="../Reloaded.Trimming.targets" Condition="Exists('../Reloaded.Trimming.targets')" />
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Reloaded.Mod.Interfaces" Version="2.4.0" />
+    <PackageReference Include="Reloaded.Hooks.Definitions" Version="1.12.0" />
+    <PackageReference Include="Reloaded.SharedLib.Hooks.ReloadedII" Version="1.6.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../RNSReloaded.Interfaces/RNSReloaded.Interfaces.csproj" />
+  </ItemGroup>
+</Project>

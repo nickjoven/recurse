@@ -1,0 +1,21 @@
+{
+  "ModId": "RNSReloaded.CooldownShapes",
+  "ModName": "Cooldown Shapes",
+  "ModAuthor": "raas_ui",
+  "ModVersion": "1.0.0",
+  "ModDescription": "Replaces cooldown bars with configurable geometric indicators (rings, crosses, grids, dots) for spatial cooldown tracking.",
+  "ModDll": "RNSReloaded.CooldownShapes.dll",
+  "ModIcon": "",
+  "ModR2RManagedDll32": "",
+  "ModR2RManagedDll64": "",
+  "ModNativeDll32": "",
+  "ModNativeDll64": "",
+  "IsLibrary": false,
+  "ReleaseMetadataFileName": "",
+  "PluginData": {},
+  "IsUniversalMod": false,
+  "ModDependencies": ["RNSReloaded"],
+  "OptionalDependencies": [],
+  "SupportedAppId": ["RabbitSteel.exe"],
+  "ProjectUrl": ""
+}
