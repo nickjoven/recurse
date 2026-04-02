@@ -20,11 +20,15 @@ public unsafe class Mod : IMod {
     private GMDraw? _gm;
     private CooldownReader? _reader;
     private IHook<ScriptDelegate>? _drawHook;
+    private IHook<ScriptDelegate>? _hotbarUsedHook;
+    private IHook<ScriptDelegate>? _cooldownAddHook;
+
+    // Track last-used ability per slot for debugging/correlation
+    private readonly Dictionary<int, double> _lastHotbarUseTime = new();
 
     // Discovery mode throttle — log every N frames
     private int _frameCount;
     private const int DiscoveryLogInterval = 300;
-    private HashSet<string> _discoveredScripts = new();
 
     public void StartEx(IModLoaderV1 loader, IModConfigV1 modConfig) {
         _rnsRef = loader.GetController<IRNSReloaded>();
@@ -52,6 +56,13 @@ public unsafe class Mod : IMod {
             HookDrawScript(rns, hooks, _config.DrawHookScript);
         }
 
+        // Hook hotbar triggers to track ability activations
+        HookScript(rns, hooks, "hotbarUsed", HotbarUsedDetour, ref _hotbarUsedHook);
+        HookScript(rns, hooks, "hotbarUsedProc", HotbarUsedDetour, ref _hotbarUsedHook);
+
+        // Hook the game's own cooldown manipulation to observe CD changes
+        HookScript(rns, hooks, "tpat_hb_add_cooldown", CooldownAddDetour, ref _cooldownAddHook);
+
         // Strategy 2: Use OnExecuteIt to piggyback on any per-frame script
         // This fires on every script execution — we draw after HUD-related scripts
         rns.OnExecuteIt += OnExecuteIt;
@@ -70,6 +81,62 @@ public unsafe class Mod : IMod {
             _logger.PrintMessage("[CooldownShapes] Hooked draw script: " + scriptName, _logger.ColorGreenLight);
         } catch (Exception e) {
             _logger.PrintMessage("[CooldownShapes] Failed to hook '" + scriptName + "': " + e.Message, _logger.ColorRed);
+        }
+    }
+
+    private void HookScript(IRNSReloaded rns, IReloadedHooks hooks, string scriptName,
+                             ScriptDelegate detour, ref IHook<ScriptDelegate>? hookField) {
+        try {
+            var id = rns.ScriptFindId(scriptName);
+            var script = rns.GetScriptData(id - 100000);
+            hookField = hooks.CreateHook<ScriptDelegate>(detour, script->Functions->Function);
+            hookField.Activate();
+            hookField.Enable();
+            _logger.PrintMessage("[CooldownShapes] Hooked: " + scriptName, _logger.ColorGreenLight);
+        } catch {
+            // Script may not exist — non-fatal
+            _logger.PrintMessage("[CooldownShapes] Script not found (non-fatal): " + scriptName, _logger.ColorYellowLight);
+        }
+    }
+
+    /// <summary>Fires when an ability is used from the hotbar. Logs for discovery.</summary>
+    private RValue* HotbarUsedDetour(CInstance* self, CInstance* other, RValue* returnValue, int argc, RValue** argv) {
+        if (_config.DiscoveryMode && _rnsRef!.TryGetTarget(out var rns)) {
+            var playerId = TryReadLong(rns, self, "playerId");
+            var hbId = TryReadLong(rns, self, "hbId");
+            var gt = _reader?.GetGlobalDouble("gametime");
+            _logger.PrintMessage(
+                $"[CooldownShapes:Discovery] hotbarUsed: player={playerId}, hbId={hbId}, gametime={gt}",
+                _logger.ColorYellowLight);
+
+            if (hbId != null) {
+                _lastHotbarUseTime[(int)hbId.Value] = gt ?? 0;
+            }
+        }
+        return _hotbarUsedHook!.OriginalFunction(self, other, returnValue, argc, argv);
+    }
+
+    /// <summary>Fires when the game adds/reduces cooldown on an ability. Logs for discovery.</summary>
+    private RValue* CooldownAddDetour(CInstance* self, CInstance* other, RValue* returnValue, int argc, RValue** argv) {
+        if (_config.DiscoveryMode && _rnsRef!.TryGetTarget(out var rns)) {
+            string args = "";
+            for (int i = 0; i < argc; i++) {
+                args += (i > 0 ? ", " : "") + argv[i]->ToString();
+            }
+            _logger.PrintMessage(
+                $"[CooldownShapes:Discovery] tpat_hb_add_cooldown({args})",
+                _logger.ColorYellowLight);
+        }
+        return _cooldownAddHook!.OriginalFunction(self, other, returnValue, argc, argv);
+    }
+
+    private long? TryReadLong(IRNSReloaded rns, CInstance* inst, string varName) {
+        try {
+            var val = rns.FindValue(inst, varName);
+            if (val == null) return null;
+            return rns.utils.RValueToLong(val);
+        } catch {
+            return null;
         }
     }
 
@@ -158,18 +225,40 @@ public unsafe class Mod : IMod {
             );
         }
 
-        // Try some likely candidate variable names
+        // Probe known and likely variable names from R&S internals
+        // GCD = global cooldown (locks all abilities), CD = per-ability recast
         string[] candidates = {
+            // GCD-related
+            "gcd", "gcdMax", "gcdTimer", "gcdLength",
+            "globalCooldown", "globalCooldownMax",
+            // Per-ability cooldown/recast
             "cooldown", "cooldownMax", "cd", "cdMax",
             "hbCooldown", "hbCooldownMax",
-            "abilityCooldown", "abilityCooldownMax",
-            "gcd", "gcdMax", "castTime", "castTimeMax",
-            "skillCooldown", "skillCooldownMax",
+            "recast", "recastMax", "recastTimer",
+            // Hotbar / ability identifiers (context)
+            "hbId", "playerId", "hbsUniqueId",
+            // Stock/charge system
+            "stock", "stockGcd", "stockMax",
+            // Cast/animation timing
+            "castTime", "castTimeMax",
+            "windup", "recovery",
+            // Status/buff system (for HoT/DoT cooldowns)
+            "statusId", "initLength", "strength",
+            // Invuln / defensive cooldowns
+            "invulnTimer", "invulnLength",
         };
         foreach (var name in candidates) {
             var val = _reader?.GetPlayerDouble(_config.PlayerIndex, name);
             if (val != null) {
                 _logger.PrintMessage($"  FOUND: {name} = {val.Value}", _logger.ColorGreenLight);
+            }
+        }
+
+        // Also log any recent hotbar activations
+        if (_lastHotbarUseTime.Count > 0) {
+            _logger.PrintMessage("  Recent hotbar uses:", _logger.ColorYellowLight);
+            foreach (var (hbId, time) in _lastHotbarUseTime) {
+                _logger.PrintMessage($"    hbId={hbId} at gametime={time}", _logger.ColorYellowLight);
             }
         }
     }

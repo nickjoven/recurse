@@ -6,12 +6,23 @@ namespace RNSReloaded.CooldownShapes;
 /// <summary>
 /// Reads ability cooldown state from the game.
 ///
-/// R&amp;S ability cooldowns are tracked per-player. The exact variable names
-/// depend on game version. This reader is configurable: you set the variable
-/// names via SlotConfig and it probes the game state each frame.
+/// R&amp;S has TWO separate timing systems:
+///   - GCD (Global Cooldown): when any GCD ability is used, ALL GCD abilities
+///     are locked for that ability's GCD duration. Minimum 0.3s. Affected by Haste.
+///   - CD/Recast: per-ability recharge timer. Shown as "CD(s)" in tooltips.
+///     An ability can be oGCD (no GCD) or have GCD but no recast CD.
+///   - Hidden lockout: 300ms between most oGCD abilities (post Extra Mode update).
 ///
-/// Discovery mode: when enabled, dumps all accessible player variable names
-/// to the Reloaded log so you can find the right cooldown fields.
+/// Cooldown state is stored as instance variables on GameMaker objects,
+/// accessed via the YYObjectBase variable hash map. Variable names survive
+/// in data.win even with YYC compilation — use UndertaleModTool to find them.
+///
+/// Known hookable functions:
+///   - hotbarUsed / hotbarUsedProc: triggers when an ability is activated
+///   - tpat_hb_add_cooldown: the game's own cooldown manipulation function
+///   - scr_pattern_deal_damage_enemy_subtract: damage dealing (for context)
+///
+/// Discovery mode: when enabled, probes player variables and logs hits.
 /// </summary>
 public unsafe class CooldownReader {
     private readonly IRNSReloaded _rns;
