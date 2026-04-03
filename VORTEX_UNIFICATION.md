@@ -223,48 +223,69 @@ verification of vortex dynamics. The circuit-depth prediction is purely ours.
 - Divergent wave vectors near zeros ↔ continued fraction partial quotients
 - Qubit phase space naturally encodes circle-map-like dynamics
 
-### Our predictions (testable but not in the papers)
-- T_H = (ℏ/2πk_B) · |dρ/dΩ| at the tongue edge
-- Combining efficiency follows (K/2)^ℓ (fit against Paper 7 data)
-- Vortex array stability requires Farey neighbor charges
-- Quantum circuit depth ∝ Stern-Brocot depth of target rotation number
+### Our predictions — all have gaps
+- T_H = (ℏ/2πk_B) · |dρ/dΩ| at the tongue edge — **BLOCKED** on
+  lattice-to-circle-map reduction (paper-sized problem)
+- Combining efficiency follows (K/2)^ℓ — **CONFOUNDED** by dimensional
+  mismatch (tongue width ≠ combining efficiency; exp(-σ²ℓ²) fits equally)
+- ~~Vortex array stability requires Farey neighbor charges~~ — **REMOVED**
+  (zero data)
+- Quantum circuit depth ∝ Stern-Brocot depth — **BLOCKED** on KAM bridge
+  theorem for point-vortex Hamiltonians
 
 ### Speculative (thin evidence)
 - Dynamical Casimir radiation (Paper 3) connects to synchronization cost
 - Polygonal STOV geometry constrained by Farey structure
 - Superluminal annihilation velocities follow from Farey neighbor separation
+- Bekenstein-Hawking entropy = Stern-Brocot address count (no derivation)
 
 ---
 
-## 4. Predictions from Unification
+## 4. Predictions from Unification — Honest Status
 
 ### P1: Hawking Temperature from Tongue-Edge Gradient
 **T_H = (ℏ/2πk_B) · |dρ/dΩ|_{tongue edge}**
 
-Status: **Our prediction.** Paper 1 derives T_H from interface sharpness.
-Testing: Compute tongue-edge slopes in a circle map parameterized to match
-Paper 1's lattice parameters. If they give the same T_H, the mapping holds.
+Status: **BLOCKED — missing intermediate derivation.** Paper 1 derives T_H
+from interface sharpness via Parikh-Wilczek tunneling in a non-Hermitian
+lattice. Our formula uses circle-map tongue-edge gradients. The two formalisms
+have not been connected. Requires showing that the lattice Hamiltonian reduces
+to a circle map under some parameter mapping (plausible via Floquet analysis
+of the non-Hermitian system, but this is a paper-sized problem). Without the
+reduction, this is a formula without a bridge.
 
-### P2: Combining Efficiency as Tongue-Width Scaling
-**η(ℓ) ∝ 1 - c·(K/2)^ℓ** for some coupling K and constant c.
+### P2: Combining Efficiency as Tongue-Width Scaling ~~[DEMOTED]~~
+**η(ℓ) ∝ 1 - c·(K/2)^ℓ**
 
-Status: **Testable now.** Paper 7 gives three data points (ℓ=1,5,8 →
-95.0%, 93.9%, 91.2%). Fit K and c. If the fit is good, predict η for
-ℓ = 2, 3, 4 and propose the experiment.
+Status: **CONFOUNDED — dimensional mismatch.** Arnold tongue width W(p/q,K)
+∝ (K/2)^q measures the *fraction of parameter space* that mode-locks at
+rotation number p/q. Combining efficiency measures how well beams interfere.
+These are different quantities. The efficiency drop (95.0% → 93.9% → 91.2%
+at ℓ = 1, 5, 8) is more naturally explained by phase-error accumulation: a
+charge-ℓ beam requires an ℓ×2π phase ramp, so alignment errors scale with ℓ.
+A simple η ∝ exp(-σ²ℓ²) fits the trend equally well. Three data points cannot
+distinguish our (K/2)^ℓ from σ²ℓ² or any other monotone decreasing function.
+The mapping from "tongue width" to "combining efficiency loss" lacks physical
+justification. **Not a valid prediction in its current form.**
 
-### P3: Vortex Array Stability from Farey Depth
-Maximum stable array size at depth D: **N_max = |F_D|**.
+### ~~P3: Vortex Array Stability from Farey Depth~~ [REMOVED]
+~~Maximum stable array size at depth D: N_max = |F_D|.~~
 
-Status: **Speculative.** No paper addresses this. Would require systematic
-stability measurements across array configurations.
+Status: **REMOVED — zero data, pure speculation.** Paper 8 demonstrates
+holographic control over STOV geometry but tests no stability thresholds.
+No paper in any cluster invokes Farey neighbor constraints on vortex arrays.
+Retained in the DAG only as a flagged research direction, not as a prediction.
 
 ### P4: Quantum Circuit Depth = Stern-Brocot Depth
-Minimum circuit depth to precision ε scales as **depth_SB(p/q)** where
-|ρ - p/q| < ε.
+**Minimum circuit depth ∝ depth_SB(p/q)**
 
-Status: **Our prediction.** Paper 10 does not report circuit depth vs.
-rotation number precision. Benchmarking their 8-qubit setup against
-continued-fraction depth would test this directly.
+Status: **BLOCKED — missing KAM bridge.** Paper 10 reformulates Navier-Stokes
+as a quantum Hamiltonian. The claim that circuit complexity tracks Stern-Brocot
+depth requires proving that point-vortex Hamiltonian eigenvalues are organized
+by rational rotation numbers — a KAM theory question for the specific system.
+The bridge from "Hamiltonian vortex dynamics" to "Stern-Brocot depth governs
+complexity" depends on an unstated theorem about integrability. Without it,
+this is an interesting conjecture, not a testable prediction.
 
 ---
 
@@ -301,29 +322,41 @@ Four new ontology nodes bridge the abstract framework to vortex physics:
 - **`quantum-vortex-simulation`** (L3) — circuit verification of vortex dynamics
   Parents: `conservation-as-computability`, `circle-map`, `stern-brocot-tree`
 
-Four new predictions (Level 4 leaves):
+Four new prediction leaves (Level 4) — **all have identified gaps**:
 
 - **`hawking-from-tongue-edge`** — T_H from rotation number gradient
+  [BLOCKED: lattice → circle map reduction not performed]
 - **`combining-efficiency-scaling`** — η(ℓ) follows tongue-width decay
+  [CONFOUNDED: dimensional mismatch, alternative fits equally good]
 - **`array-farey-stability`** — max stable array = Farey sequence length
+  [REMOVED: zero supporting data, retained only as flagged research direction]
 - **`circuit-depth-sb-depth`** — circuit complexity = CF complexity
+  [BLOCKED: KAM bridge theorem for point-vortex Hamiltonians not established]
 
 ---
 
-## 7. Next Steps
+## 7. Next Steps — Ordered by What Would Actually Resolve Gaps
 
-1. **Immediate (computational):** Fit Paper 7's efficiency data (95.0%, 93.9%,
-   91.2% at ℓ = 1, 5, 8) to η(ℓ) = 1 - c·(K/2)^ℓ. If the fit works, we
-   have a quantitative prediction for untested charges.
+1. **Unblock P1 (theoretical, paper-sized):** Derive the circle-map reduction
+   of the non-Hermitian tight-binding Hamiltonian (Paper 1). If the lattice
+   system's dispersion relation near the interface can be mapped to a kicked
+   rotor / circle map, then T_H from tongue-edge gradient becomes testable.
+   If the reduction fails, `analogue-horizon` should be demoted or removed.
 
-2. **Near-term (theoretical):** Map Paper 1's lattice parameters to circle-map
-   parameters. Compute T_H both ways. Agreement would validate the
-   horizon ↔ tongue boundary identification.
+2. **Kill or save P2 (computational, quick):** Fit Paper 7's three efficiency
+   points to *both* η = 1-c·(K/2)^ℓ and η = exp(-σ²ℓ²). If the fits are
+   indistinguishable (likely), this prediction is dead in its current form.
+   To revive it, one would need ≥6 data points across ℓ = 1..10 *and* a
+   physical argument for why tongue width governs combining efficiency.
 
-3. **Medium-term (observational):** Propose to Paper 10's group (Wang et al.)
-   a benchmark: measure circuit depth vs. rotation-number precision for their
-   8-qubit vortex simulation. Compare against Stern-Brocot depth.
+3. **Unblock P4 (theoretical, hard):** Investigate whether the point-vortex
+   Hamiltonian used by Wang et al. has a rotation-number structure in its
+   spectrum (a KAM question). Literature on integrability of N-vortex systems
+   may already contain relevant results for N ≤ 4.
 
-4. **Long-term (experimental):** Design a vortex array stability experiment
-   that systematically varies nearest-neighbor charge pairs to test the
-   Farey neighbor condition.
+4. **Strengthen cluster 2B (grounded, no gaps):** The reverse-energy-flow
+   and Poynting-vector-vortex results (Papers 4, 5, 6) are the strongest
+   cluster — all phenomena are directly observed and well-characterized.
+   The framework interpretation (cost-functional saddle, CF divergence)
+   is speculative but the physics is solid. Focus here for the most
+   credible connections.
