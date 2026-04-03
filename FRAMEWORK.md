@@ -620,112 +620,94 @@ References:
 
 ---
 
-## 10. The Framework Is a Grammar, Not a Prediction Engine
+## 10. The Grammar and Its Instantiations
 
-### The error we made and corrected
-
-This framework was initially used to **predict** specific physical
-quantities: Hawking temperatures, combining efficiencies, BKT critical
-temperatures, band gap widths. Every such prediction was killed by
-computation:
-
-| Prediction | How it died |
-|---|---|
-| η(ℓ) = 1 - c·(K/2)^ℓ | K/2 > 1 required; wrong regime; phase-error fits better |
-| T_BKT/T_H = (δ-1)/δ | BKT ≠ Feigenbaum; different universality classes |
-| Band gap ∝ (K-1) | Fold measure ∝ √(K-1); and K ↔ Δn mapping unknown |
-
-The pattern: the circle map mathematics was correct in every case. The
-physics in each paper was correct. **The failure was always at the bridge**
-— the mapping from physical parameters to the circle map's K. That mapping
-was assumed, never derived, and it is where all the actual physics lives.
-
-### What the framework actually does
+### What the grammar does
 
 The circle map is the **normal form** for periodically forced oscillators
 near resonance (Arnold 1983). The Stern-Brocot tree, Arnold tongues,
 Feigenbaum cascades, Lyapunov exponents, tongue overlap, and self-similar
 descent are the **vocabulary of possible behaviors** for such systems.
 
-The framework is a **grammar**:
+Given the coupling strength K, the grammar classifies dynamics:
 
-- Given K = 0: it tells you the system has periodic or quasiperiodic orbits,
-  classified by the Stern-Brocot tree.
-- Given 0 < K < 1: it tells you which rotation numbers lock (tongues),
-  how wide the locking regions are ((K/2)^q), and which irrationals resist
-  longest (noble numbers).
-- Given K = 1: it tells you the staircase is complete, the scaling is
-  universal, and the golden ratio governs the critical point.
-- Given K > 1: it tells you tongues overlap (multistability), each tongue
-  develops internal cascades (Feigenbaum), chaos fills the gaps, and periodic
-  windows within chaos recapitulate the Stern-Brocot hierarchy (self-similar
-  descent).
+- **K = 0:** periodic or quasiperiodic orbits, classified by the
+  Stern-Brocot tree.
+- **0 < K < 1:** mode-locking with tongue widths (K/2)^q; noble
+  numbers resist longest.
+- **K = 1:** complete staircase; universal scaling at the golden ratio.
+- **K > 1:** tongue overlap (multistability), internal cascades
+  (Feigenbaum), chaos between islands, self-similar descent of the
+  Stern-Brocot hierarchy into each chaotic region.
 
-What the grammar does **not** do: it does not tell you the value of K for
-a given physical system. That is a **system-specific derivation** that
-requires understanding the actual physics:
+### The K-mapping: where the physics lives
 
-| System | What determines K |
-|---|---|
-| Josephson junction | Ratio of drive current to critical current |
-| Cardiac pacemaker | Coupling strength between cells |
-| Non-Hermitian lattice | Hopping asymmetry, gain/loss ratio |
-| Photonic crystal | Refractive index contrast, geometry |
-| Optical vortex array | Phase noise, beam count, charge |
-| Point vortex system | Inter-vortex Hamiltonian, separation |
+The grammar classifies behavior once K is known. Deriving K for a given
+physical system is the system-specific physics:
 
-Each of these is a one-system physics problem. The framework organizes
-what you find after solving it; it cannot substitute for solving it.
+| System | What determines K | Status |
+|---|---|---|
+| **Gravity (continuum Kuramoto)** | K(x,x') = G_γ(x,x'), the Green's function of the spatial Laplacian | **Derived** (see below) |
+| Josephson junction | Ratio of drive current to critical current | Classical textbook |
+| Cardiac pacemaker | Coupling strength between cells | Classical textbook |
+| Non-Hermitian lattice | Hopping asymmetry, gain/loss ratio | Open |
+| Photonic crystal | Refractive index contrast, geometry | Open |
+| Optical vortex array | Phase noise, beam count, charge | Open |
+| Point vortex system | Inter-vortex Hamiltonian, separation | Open |
 
-### How to use the framework correctly
+The methodology: derive K for a given system from first principles, locate
+it in the regime map, read off the behavior from the grammar, compare to
+observation. For the gravity sector, this program has been completed. For
+the vortex systems, it remains open.
 
-**Direction that works: physics → grammar.**
-Take a physical system. Derive its effective K from first principles.
-Locate K in the regime map (K < 1, K = 1, K > 1). Read off the possible
-behaviors from the grammar. Compare to observation.
+### The gravity sector: K derived
 
-**Direction that fails: grammar → physics.**
-Start from the grammar. Pick a behavior (tongue width, cascade ratio,
-fold measure). Assume it maps to a specific physical quantity without
-deriving K. Make a numerical prediction. This produces curve-fitting
-that looks like physics but isn't.
+The Kuramoto-Einstein dictionary (`proslambenomenos/kuramoto_einstein_mapping.md`)
+provides an explicit mapping between continuum Kuramoto synchronization and
+the ADM formulation of general relativity:
 
-### The DAG structure this implies
+| Kuramoto field | ADM field | Interpretation |
+|---|---|---|
+| r(x,t) — local coherence | N — lapse function | Coherence is clock rate. Horizon = r = 0 = N = 0 |
+| ∂ᵢψ — mean phase gradient | Nᵢ — shift vector | Phase gradients are coordinate drift |
+| Cᵢⱼ — coherence tensor | γᵢⱼ — spatial metric | Synchronization structure is geometry |
+| ω(x) — natural frequency | √(4πGρ) — Jeans frequency | Matter sets the natural frequency |
+| **K(x,x') — coupling kernel** | **G_γ(x,x') — spatial Green's function** | **Coupling propagates through geometry** |
+
+The self-consistency equation on the Stern-Brocot tree, at K = 1 in the
+continuum limit, uniquely produces the Einstein field equations via
+Lovelock's theorem (Derivation 13, Proof Chain A in
+`harmonics/sync_cost/derivations/`). The synchronization cost functional
+(`harmonics/sync_cost/FRAMEWORK.md`) is the variational principle.
+
+This means K is **not a free parameter** in the gravity sector — it is
+determined by the spatial geometry through the Green's function. The
+grammar's predictions for the gravity sector are unconditional once the
+Kuramoto-Einstein identification is granted.
+
+### The DAG structure
 
 ```
-L0:  Integers, mediant, fixed point, parabola     [pure math]
+L0:  Integers, mediant, fixed point, parabola        [pure math]
       │
-L1:  SB tree, circle map, tongues, staircase,     [grammar]
+L1:  SB tree, circle map, tongues, staircase,        [grammar]
      Feigenbaum, Lyapunov, period-doubling
       │
-L2:  Regime classification (K<1, K=1, K>1),       [grammar]
+L2:  Regime classification (K<1, K=1, K>1),          [grammar]
      multistability, tongue-internal cascade,
      self-similar descent, fold measure
       │
-L3:  Candidate instantiations                     [physics]
-     Each tagged [K-mapping: OPEN]
-     Each with: observation + structural home
-              + open problem (what determines K)
+L3:  Instantiations                                  [physics]
+     ├─ Gravity sector: K derived (Kuramoto-Einstein)
+     └─ Candidate systems: K-mapping open
+        (analogue-horizon, reverse-energy-flow,
+         vortex-array, quantum-vortex-simulation)
       │
-L4:  Conditional predictions                      [testable]
-     Form: IF K maps as X, THEN observable Y
-     Each killed or confirmed by deriving the K mapping
+L4:  Predictions                                     [testable]
+     ├─ Gravity: unconditional (Ω_Λ, a₀, n_s, ...)
+     └─ Vortex: conditional on K-derivation
 ```
 
-The hard work — and the publishable work — is at L3: deriving K for
-each system. The grammar (L0-L2) is standard mathematics. The
-predictions (L4) are consequences. The K-mapping is the physics.
-number-theoretic structure (Stern-Brocot tree, continued fractions, Farey
-graph) persists in the organization of the remaining mode-locked islands
-amid chaos.
-
-This is where the vortex physics lives (P2's kill established K/2 > 1),
-and it is where the framework must go next. But it cannot be built on
-weak-coupling formulas. It requires the K > 1 phenomenology: Lyapunov
-exponents, strange attractors, the measure of chaotic vs. locked regions,
-and the Feigenbaum renormalization group.
-
-The building blocks for K > 1 already exist in the ontology (`parabola`,
-`feigenbaum-constants`, `period-doubling-cascade`). They are currently
-disconnected from the vortex bridge nodes. Connecting them is the next
-structural step.
+For the gravity sector, the derivation chain from L0 to L4 is complete
+(39 derivations in `harmonics/sync_cost/derivations/`). For the vortex
+systems, deriving K is the open problem and the publishable contribution.

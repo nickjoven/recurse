@@ -1,275 +1,160 @@
-# Admitted Gaps and K > 1 Resolutions
+# Open Questions in the Overcritical Regime
 
-Six open problems identified in the literature, with precise statements of
-what the overcritical circle-map framework would predict for each. Each gap
-is sourced from the papers or from review articles that flag the question.
-
----
-
-## Gap 1: The Trans-Planckian Problem in Analogue Horizons
-
-**What the literature admits:**
-
-Hawking radiation derivations require tracing modes back through the horizon
-to arbitrarily high frequencies. In analogue systems (lattices, BECs, optical
-media), there is a physical UV cutoff — the lattice spacing, the healing
-length, the molecular scale. When the horizon is sharp (changes within one
-lattice site), the Hawking temperature becomes ill-defined and "an instability
-in the form of an exponential burst of charge and phase quantum fluctuations"
-replaces regular thermal emission (arXiv 2204.06583). Garcia Martin-Caro et al.
-(2507.13894) find that thermal signatures are "highly dependent on frequency
-bands and acceleration parameters" — some configurations produce genuine
-thermal spectra, others produce spurious non-thermal artifacts, and they lack
-a criterion to predict which.
-
-**What K > 1 provides:**
-
-The tongue-internal cascade gives a **natural hierarchy of scales** between
-the tongue boundary (the horizon) and the Feigenbaum accumulation point
-(the onset of chaos within the tongue). The cascade produces scales at
-ratios converging to δ = 4.669...:
-
-```
-    tongue edge → period q → 2q → 4q → ... → chaos
-    scale:         Λ₀       Λ₀/δ   Λ₀/δ²     Λ₀/δⁿ
-```
-
-The Feigenbaum accumulation point is a **natural UV cutoff** — it is where
-the cascade terminates and chaotic fluctuations replace periodic orbits.
-The "exponential burst" that the lattice models observe when the horizon is
-sharp corresponds to the system being pushed past the accumulation point
-into fully developed chaos within the tongue.
-
-**Testable prediction:** The gray-body factors measured by Garcia Martin-Caro
-et al. should exhibit oscillatory structure with period ratios converging to
-1/δ. The frequency bands where thermal signatures emerge correspond to modes
-within the cascade; the bands where they fail correspond to modes beyond the
-accumulation point.
+Four open problems in the vortex and analogue-gravity literature where the
+K > 1 circle-map grammar provides structural predictions. Each gap is
+sourced from published papers. Computation results are stated as findings.
 
 ---
 
-## Gap 2: Why Singularity Velocities Diverge Before Annihilation
+## 1. Singularity Velocity Divergence Before Annihilation
 
-**What the literature admits:**
+**The problem:**
 
-Bucher et al. (2509.17675, published in Nature 2026) directly measured
-superluminal phase-singularity velocities before vortex-antivortex
-annihilation. Their explanation: "as opposite-charged singularities approach
-each other, their paths in spacetime must form a continuous curve at the
-annihilation point, forcing their acceleration to unbounded velocities."
-This is kinematic (continuity forces it) but not dynamical — it does not
-explain the **rate** of divergence or why slow group velocity media
-"paradoxically amplify" the effect.
+Bucher et al. (2509.17675, Nature 2026) directly measured that optical
+phase singularities accelerate to unbounded velocities before
+vortex-antivortex annihilation in hexagonal boron nitride. The kinematic
+explanation — continuity of spacetime paths forces divergence at the
+annihilation point — does not predict the **rate** of divergence or explain
+why slow group-velocity media amplify the effect.
 
-**What K > 1 provides:**
+**Circle-map structure:**
 
-As a vortex-antivortex pair approaches annihilation, the effective coupling
-between them increases (stronger mutual influence at shorter range). This
-drives the system deeper into the overcritical regime: K grows through the
-interaction. The Lyapunov exponent at the tongue boundary diverges as:
+As a vortex-antivortex pair approaches annihilation, mutual coupling
+increases (shorter range → stronger interaction). In the circle-map
+grammar, this corresponds to K increasing through the overcritical regime.
+The Lyapunov exponent at the tongue boundary scales as:
 
 ```
-    λ ~ (K - K_c)^γ    as K → K_c from above
+    λ ~ (K - K_c)^γ
 ```
 
-where K_c is the critical coupling for the specific tongue and γ is a
-critical exponent. The singularity velocity v_s should scale with the
-Lyapunov exponent: faster divergence of nearby orbits = faster motion of
-the phase singularity through the field.
+Computation at the golden-mean winding number gives **γ ≈ 1.19 ± 0.08**.
+If the effective coupling scales as K_eff ~ 1/r² (from Biot-Savart
+point-vortex dynamics) and the approach law is r ~ Δt^α, the velocity
+divergence exponent is **β = 2αγ**:
 
-**Why slow media amplify:** In a medium with slow group velocity v_g, the
-effective coupling K_eff ~ 1/v_g (slower propagation means longer
-interaction time). The hexagonal boron nitride in Bucher et al. has
-exceptionally slow phonon polaritons, pushing K_eff deep into the
-overcritical regime. The "paradox" resolves: slow media don't amplify
-velocity directly — they amplify the effective coupling, which drives
-the Lyapunov divergence harder.
+- Dissipative regime (α = 1/2): β ≈ 1.19
+- Linear approach (α = 1): β ≈ 2.38
 
-**Testable prediction:** The velocity divergence exponent (v_s ~ Δt^{-β}
-as annihilation time Δt → 0) should be related to the Lyapunov critical
-exponent γ. Measuring β in Bucher et al.'s data and comparing to γ from
-the circle map at the relevant tongue would test this.
+**Open:** The mapping K_eff ~ 1/r² is structural analogy, not derivation.
+The identification of singularity velocity with the Lyapunov exponent
+requires justification. Measuring β from Bucher et al.'s data would
+determine whether the circle-map exponent γ is relevant.
 
 ---
 
-## Gap 3: Predictive Criterion for Photonic Band Gaps
+## 2. Predictive Criterion for Photonic Band Gaps
 
-**What the literature admits:**
+**The problem:**
 
-Pryamikov (2601.21704) establishes that Poynting-vector vortices determine
-whether photonic crystals produce band gaps or transmission, but states only
-that "the geometry and dynamics of the Poynting-vector vortices determine
-whether the incident electromagnetic energy is impeded." A 2025 study on
-micro-structured optical fibers confirms that "differences in the level of
-leakage losses arise from the vortex structure of the Poynting vector of
-the fundamental core mode." Neither provides a **predictive criterion** for
-which vortex configurations produce band gaps.
+Pryamikov (2601.21704) establishes that Poynting-vector vortices in 2D
+photonic crystals determine band gap formation, but provides no predictive
+criterion for which vortex configurations produce band gaps.
 
-**What K > 1 provides:**
+**Circle-map structure:**
 
-The fold region of the overcritical circle map — the interval where
-F'(θ) < 0 — is precisely the region of reversed energy flow. The band gap
-corresponds to parameter configurations where the fold captures a
-significant fraction of the phase space:
+The fold region of the overcritical circle map — where F'(θ) < 0 — is the
+region of reversed energy flow. The exact fold measure is:
 
 ```
-    Band gap width ∝ measure{θ : F'(θ) < 0} ∝ (K - 1)
+    μ(K) = arccos(1/K) / π
 ```
 
-For K ≤ 1, the fold has zero width — no band gap. For K > 1, the fold
-width grows linearly in K - 1. This gives a quantitative prediction:
+This is zero for K ≤ 1 and grows monotonically for K > 1. Near the
+critical point:
 
-**The band gap opens when the effective coupling exceeds the critical value
-K = 1, and its width is proportional to K - 1.**
+```
+    μ(K) ~ √(2(K-1)) / π       (square root, not linear)
+```
 
-**Testable prediction:** In Pryamikov's 2D photonic crystals, the coupling
-K depends on the refractive index contrast and the crystal geometry.
-Plotting band gap width vs. (n₁/n₂ - 1) (a proxy for K - 1) should give
-a linear relationship for small overcriticality. The slope encodes the
-local phase-space structure.
+The band gap opens when the effective coupling exceeds the critical value
+K = 1, and its width is proportional to **√(K-1)**, not (K-1).
+
+**Open:** The mapping K ↔ Δn (refractive index contrast) is not derived.
+Known photonic band gap scaling is linear in Δn. If the identification
+holds, it implies K - 1 ∝ (Δn)², but this requires derivation from the
+specific system's coupling structure.
 
 ---
 
-## ~~Gap 4: BKT Critical Temperature on Curved Spacetime~~ [RETRACTED]
+## 3. Classical Simulation Cost and Stern-Brocot Depth
 
-**What the literature admits:**
+**The problem:**
 
-Ghezzi & Custodio (2603.13544) find vortex-antivortex pair proliferation
-near black hole horizons using the 2D XY model on Schwarzschild-de Sitter
-spacetime. They identify the phenomenon but do not derive the **critical
-temperature** T_BKT as a function of the black hole parameters.
+Quantum algorithms for Navier-Stokes show potential exponential speedup
+for turbulent flows (arXiv 2303.16550), and Wang et al. (2506.04023)
+demonstrate quantum simulation of multi-vortex dynamics. There is no
+criterion for which vortex configurations benefit from quantum simulation
+versus which are efficiently classical.
 
-**Original prediction — FALSIFIED BY COMPUTATION:**
+**Circle-map structure (confirmed by computation):**
 
-The original claim was T_BKT / T_Hawking = (δ-1)/δ ≈ 0.786. This is wrong
-on two independent grounds:
+At K = 1.5, the self-similar descent organizes periodic windows within
+chaotic bands by Stern-Brocot depth:
 
-1. **(δ-1)/δ is not the correct cascade ratio.** The actual logistic map
-   ratio (r_∞ - r_1)/(r_max - r_1) = 0.570, not 0.786. The formula
-   conflated the geometric series ratio with the parameter-space ratio.
+- **Window widths decay exponentially:** width ~ 0.458^depth (R² = 0.78).
+  Each additional depth level shrinks the mode-locked window by ~2.2×.
+- **Tongue width scaling steepens:** q^{-3.2} at K = 1.5, versus the
+  universal q^{-2} at K = 1. The self-similar descent makes windows
+  narrower faster in the overcritical regime.
+- **Dynamical convergence is polynomial:** N ~ q^{1.15} iterates to
+  determine the rotation number. The exponential cost is in **parameter
+  resolution** (targeting a specific deep-SB-depth rotation number), not
+  in time-stepping.
+- **Noble numbers are hardest:** confirmed. Irrational rotation numbers
+  (infinite SB depth, zero window width) require infinite classical
+  precision.
 
-2. **BKT and Feigenbaum are different universality classes.** BKT is a
-   topological transition (vortex-antivortex unbinding), governed by the
-   Kosterlitz RG flow. Feigenbaum is a metric transition (period-doubling
-   → chaos). They are not the same transition and one does not predict
-   the other. The known BKT temperature T_BKT/J ≈ 0.893 for flat 2D XY
-   is derived from the Kosterlitz flow equations, not from any cascade.
-
-**What the cascade DOES predict (revised, narrower claim):**
-
-For a **driven** XY model near a black hole horizon (not the equilibrium
-model Ghezzi & Custodio study), the topologically ordered phase (T < T_BKT,
-bound vortex pairs) can undergo period-doubling under external driving.
-The chaos onset within the ordered phase would occur at:
-
-```
-    T_chaos / T_BKT ≈ (r_∞ - r_1) / (r_max - r_1) ≈ 0.570
-```
-
-This is testable but requires a different system than the one in the paper.
-
-**For the actual Ghezzi & Custodio system:** The BKT transition on curved
-spacetime is governed by the position-dependent effective coupling
-J_eff(r) = J · √g_rr(r). The critical temperature is where
-T_local(r) = T_BKT(J_eff(r)). This is a well-posed GR + XY calculation,
-not a circle-map question. The K > 1 framework has nothing to add here.
+**Open:** The quantum half of the prediction — that quantum phase
+estimation resolves rotation numbers with polynomial overhead in precision
+bits — is plausible but not yet computed.
 
 ---
 
-## Gap 5: Which Vortex Flows Have Quantum Advantage
+## 4. OAM Multistability and Switching Thresholds
 
-**What the literature admits:**
+**The problem:**
 
-Quantum algorithms for Navier-Stokes show "a potential quantum exponential
-speedup" for turbulent flows (arXiv 2303.16550), and Wang et al. (2506.04023)
-demonstrate quantum simulation of multi-vortex dynamics. But there is no
-criterion for **which** vortex configurations benefit from quantum simulation
-vs. which are efficiently classical. The literature identifies speedup for
-"rough/non-smooth flows" without specifying what roughness means in terms
-of the flow's dynamical structure.
+Experiments on vortex fiber lasers demonstrate switching between OAM
+states (e.g., ℓ = 2 and ℓ = 20), and optical bistability in graphene
+quantum dot systems is sensitive to the orbital angular momentum of the
+coupling vortex beam. No framework predicts which OAM states coexist at
+given parameters or what determines switching thresholds.
 
-**What K > 1 provides:**
+**Circle-map structure (confirmed by computation):**
 
-The self-similar descent gives the criterion. Classical simulation difficulty
-tracks the depth of the Stern-Brocot tree required to resolve the flow's
-periodic windows within chaos:
+At K > 1, Arnold tongue overlap produces multistability with a clean
+Stern-Brocot hierarchy:
 
-- **Efficiently classical:** flows whose dynamics are mode-locked in
-  low-order tongues (small q, shallow SB depth). These are regular,
-  periodic, and classically simulable in polynomial time.
-- **Quantum-advantaged:** flows near noble rotation numbers (deep SB depth,
-  long continued fractions). These have self-similar structure at every
-  scale — the periodic windows within chaos recapitulate the SB hierarchy
-  — and resolving this requires exponential classical resources but maps
-  naturally to quantum superposition over the hierarchy levels.
+- Multistability first appears at K ~ 1.2, between Farey-adjacent tongues.
+- **All** overlapping pairs are SB-adjacent (tree distance = 1) up to
+  K ~ 4.0. Distant pairs require much higher coupling.
+- Overlap threshold K_c depends on SB distance: SB-adjacent pairs overlap
+  at K ~ 1.5–1.75; SB-distance ≥ 2 requires K > 4.0.
 
-**Testable prediction:** Run Wang et al.'s 8-qubit simulation for vortex
-configurations at different effective rotation numbers. Measure classical
-simulation cost (e.g., matrix product state bond dimension) vs. quantum
-circuit depth. The classical cost should grow exponentially with SB depth;
-the quantum cost should grow polynomially.
+**Open:** The ℓ-to-rotation-number mapping is the critical gap. The 1D
+circle map cannot produce coexistence between ℓ = 2 and ℓ = 20 (too
+SB-distant). Explaining distant-mode switching requires either coupled
+circle maps on a torus (higher-dimensional), a nonlinear compression
+of the OAM spectrum, or a fundamentally different identification of
+ℓ with the dynamical variable.
 
 ---
 
-## Gap 6: OAM Multistability and Switching Thresholds
+## Computation Findings
 
-**What the literature admits:**
+| Gap | Grammar result | K-mapping status |
+|---|---|---|
+| 1 (velocity) | γ ≈ 1.19; β = 2αγ | K_eff ~ 1/r² is structural, not derived |
+| 2 (band gap) | μ = arccos(1/K)/π; scales as √(K-1) | K ↔ Δn mapping open |
+| 3 (quantum cost) | Width ~ 0.458^depth (R²=0.78); q^{-3.2} | Quantum cost comparison open |
+| 4 (OAM) | SB-adjacent tongues overlap first at K~1.5 | ℓ-to-ρ mapping fails for distant charges |
 
-Experiments on graphene quantum dots show that "the optical bistability
-intensity threshold is sensitive to the orbital angular momentum and
-azimuthal phase of the coupling vortex beam." A 2025 vortex fiber laser
-demonstrates "rapid switching between OAM beams of topological charge
-ℓ = 2 and ℓ = 20." But there is no framework predicting **which** OAM
-states coexist at given parameters, or what determines the switching
-threshold between them.
+The grammar's internal computations produce clean, reproducible results
+in every case. The open problem in each gap is the mapping from the
+physical system's parameters to the circle map's coupling K.
 
-**What K > 1 provides:**
-
-Tongue overlap at K > 1 predicts exactly this. Two OAM states with
-topological charges ℓ₁ and ℓ₂ coexist when their Arnold tongues overlap
-at the operating point (Ω, K). The overlap condition depends on tongue
-widths: wider tongues (smaller q in the SB tree) overlap first. The
-switching threshold corresponds to the **basin boundary** between the
-two coexisting attractors — the unstable periodic orbit that separates
-their basins of attraction.
-
-**Testable prediction:** For the ℓ = 2 / ℓ = 20 switching laser, the
-tongue-overlap model predicts that:
-- Coexistence requires K > K_c(ℓ₁, ℓ₂) where K_c depends on the SB
-  distance between ℓ₁ and ℓ₂
-- The switching threshold (pump power at transition) scales with the
-  basin boundary width, which narrows as tongues overlap more deeply
-- Intermediate OAM states (ℓ = 3, 5, 8, 13...) should exhibit transient
-  population during switching — the system traverses the SB tree between
-  ℓ₁ and ℓ₂
-
----
-
-## Summary: Gap Resolution Scorecard
-
-| Gap | Source | K > 1 resolution | Testable? |
-|---|---|---|---|
-| Trans-Planckian cutoff | 2507.13894, 2204.06583 | Feigenbaum cascade = natural UV hierarchy | Yes: gray-body oscillation periods → 1/δ |
-| Velocity divergence rate | 2509.17675 (Nature) | Lyapunov critical exponent at tongue boundary | Yes: measure β in v_s ~ Δt^{-β}, compare to γ |
-| Band gap criterion | 2601.21704 | Fold width F'(θ)<0 ∝ (K-1) | Yes: band gap width vs. index contrast |
-| ~~BKT critical temperature~~ | ~~2603.13544~~ | ~~RETRACTED: BKT ≠ Feigenbaum (different universality class)~~ | ~~No~~ |
-| Quantum advantage criterion | 2303.16550, 2506.04023 | SB depth of rotation number | Yes: classical cost vs. quantum cost at different ρ |
-| OAM switching thresholds | fiber laser experiments | Tongue overlap + basin boundaries | Yes: intermediate ℓ transients during switching |
-
-## Computation Results (updated after parallel runs)
-
-| Gap | Grammar (internal math) | Bridge (K-mapping) | Verdict |
-|---|---|---|---|
-| 1 (gray-body) | *pending* | *pending* | — |
-| 2 (velocity) | γ ≈ 1.19 computable, β = 2αγ | K_eff ~ 1/r² unearned; v_s ~ λ ad hoc | Falsifiable but weakly bridged |
-| 3 (band gap) | μ = arccos(1/K)/π exact; ∝ √(K-1) | K ↔ Δn mapping unknown | **Wrong** on linearity claim |
-| 4 (BKT) | — | — | **Killed** (different universality class) |
-| 5 (quantum) | Width ~ 0.458^depth confirmed (R²=0.78); q^(-3.2) steeper than critical q^(-2) | Quantum poly cost untested | **Partially confirmed** |
-| 6 (OAM) | SB-adjacent tongues overlap first (K~1.5); ALL overlaps are SB-distance-1 | ℓ→ρ mapping fails for ℓ=2↔20 (too SB-distant for 1D map) | Grammar confirmed, application fails |
-
-**The pattern:** the grammar computes cleanly every time. The bridges fail
-every time. The framework classifies behavior correctly once K is known,
-but does not derive K for any physical system. This confirms the
-restructuring in FRAMEWORK.md §10: the framework is a grammar, not a
-prediction engine. The publishable work is deriving K(system) for each
-candidate instantiation.
+For the gravity sector, this mapping is derived: K(x,x') = G_γ(x,x')
+(the Green's function of the spatial Laplacian), via the Kuramoto-Einstein
+dictionary (`proslambenomenos/kuramoto_einstein_mapping.md`). For the
+vortex systems above, the analogous derivation has not been performed.

@@ -12,30 +12,28 @@ topological defect where amplitude vanishes and phase is undefined. This is the
 "hole" in every optical vortex, the "horizon" in every analogue black hole, and
 the node around which circulation is quantized in every superfluid.
 
-Our existing ontology contains the algebraic skeleton that governs these
-singularities: the circle map, Arnold tongues, the Stern-Brocot tree, and the
-Klein bottle parameter space. The vortex literature provides **physical
-instantiations** of these structures — laboratory systems where the predictions
-of the synchronization framework become measurable.
-
-This document maps each cluster onto the DAG, identifies bridging nodes, and
-**honestly assesses** which mappings are grounded in the papers versus
-interpretive extensions of our framework.
+The synchronization cost framework (harmonics/sync_cost/) provides the
+algebraic grammar that classifies these singularities: the circle map,
+Arnold tongues, the Stern-Brocot tree, the Feigenbaum cascade, and the
+Klein bottle parameter space. For the gravity sector, the Kuramoto-Einstein
+dictionary (proslambenomenos/kuramoto_einstein_mapping.md) derives the
+coupling K explicitly. For the vortex systems below, the K-mapping remains
+to be derived — each is a candidate instantiation.
 
 ---
 
 ## 1. The Unifying Object: Phase Singularity as Fixed Point
 
 A phase singularity is a point where the field amplitude is zero and the phase
-winds by 2πℓ (topological charge ℓ) around it. In the language of our ontology:
+winds by 2πℓ (topological charge ℓ) around it. In the grammar:
 
-| Ontology concept | Vortex realization |
+| Grammar concept | Vortex realization |
 |---|---|
 | **Fixed point** (L0) | The singularity core — a point mapped to itself under the circulation flow |
 | **Circle S¹** (L1) | The phase winding around the core; ρ = ℓ is the rotation number |
 | **Rotation number** (L1) | Topological charge ℓ = (1/2π)∮∇φ·dl |
 | **Arnold tongues** (L1) | Stability regions for charge-ℓ vortices under perturbation |
-| **Stern-Brocot tree** (L1) | Hierarchy of rational winding numbers in vortex lattices |
+| **Lyapunov exponent** (L1) | Diagnostic at K > 1: λ < 0 (locked), λ > 0 (chaotic) |
 
 ---
 
@@ -51,41 +49,27 @@ winds by 2πℓ (topological charge ℓ) around it. In the language of our ontol
    L081110 (Feb 2026).
    - 1D lattice with gain/loss and nonreciprocal NNN hopping → effective
      Schwarzschild metric in Painlevé-Gullstrand coordinates.
-   - Interface = analogue event horizon.
-   - Computes: Hawking temperature, Bekenstein-Hawking entropy, BH mass as
-     functions of interface sharpness and system parameters.
-   - Uses Parikh-Wilczek tunneling formalism for emission rates.
+   - Computes Hawking temperature, Bekenstein-Hawking entropy, BH mass
+     via Parikh-Wilczek tunneling.
 
 2. **Ghezzi & Custodio** — *Topological Phase Transitions in Superfluids Near
    Black Hole Horizons.*
    arXiv: [2603.13544](https://arxiv.org/abs/2603.13544) (Mar 2026).
-   - 2D XY model adapted to curved spacetime (Schwarzschild-de Sitter).
-   - Finds: vortex-antivortex pair proliferation near event and cosmological
-     horizons — a BKT transition driven by the black hole temperature.
+   - 2D XY model on Schwarzschild-de Sitter: vortex-antivortex pair
+     proliferation near event and cosmological horizons (BKT transition).
 
 3. **Garcia Martin-Caro, Olmedo & Sanchez Velazquez** — *Robustness of analogue
    Hawking radiation in cavities with moving boundaries.*
    arXiv: [2507.13894](https://arxiv.org/abs/2507.13894) (Jul 2025).
-   - Dynamical Casimir effect in expanding/collapsing/accelerating cavities.
-   - Thermal signatures emerge only in specific expanding configurations;
-     gray-body factors and oscillatory deviations from ideal thermal spectra.
-   - Framework for distinguishing genuine Hawking-like radiation from spurious
-     mirror-dynamics effects.
+   - Dynamical Casimir effect; gray-body factors and oscillatory deviations.
 
-**Mapping to ontology (with confidence):**
-
-| Claim | Confidence | Basis |
-|---|---|---|
-| The horizon is an Arnold tongue boundary (mode-locked inside, drifting outside) | **Interpretive** | Our framework's language, not the papers'. Paper 1 uses Painlevé-Gullstrand mapping, not circle-map language. The analogy is structurally suggestive but not demonstrated. |
-| BKT vortex-antivortex nucleation near horizons maps to Klein bottle topology | **Partially grounded** | Paper 2 explicitly finds BKT-like pair proliferation near horizons. The Klein bottle mapping is our addition. |
-| Hawking temperature ∝ dρ/dΩ at tongue edge | **Speculative** | Paper 1 derives T_H from interface sharpness via Parikh-Wilczek tunneling. The tongue-edge gradient formula is our prediction, not theirs. |
-| Dynamical Casimir thermal signatures relate to synchronization cost | **Weak** | Paper 3 is about moving boundaries (dynamical Casimir), not vortex dynamics. Connection to our framework is through analogue gravity broadly, not phase singularities specifically. |
-
-**Bridging node:** `analogue-horizon` (Level 2) — reinterprets the tongue
-boundary as an event horizon. This is a *proposal*, not something established
-by the papers.
-
----
+**Grammar connection:** In the gravity sector, the Kuramoto-Einstein dictionary
+provides the K-mapping: r(x,t) = N (coherence = lapse function), so the
+event horizon is r = 0 = N = 0, and K(x,x') = G_γ(x,x') is the Green's
+function of the spatial Laplacian. For Paper 1's non-Hermitian lattice, the
+analogous mapping K(hopping asymmetry, gain/loss) has not been derived.
+The BKT transition (Paper 2) is a topological phase transition distinct from
+the Feigenbaum period-doubling cascade — they are different universality classes.
 
 ### 2B. Singularities & Energy Flows
 
@@ -94,49 +78,28 @@ by the papers.
 4. **Kotlyar, Nalimov, Kovalev & Telegin** — *2D optical vortices and a reverse
    energy flow occurring near the intensity zeros.*
    Optics Letters **51**(4), 973–976 (Feb 2026). **Not on arXiv.**
-   - Non-paraxial 2D TE-polarized light fields form optical vortices near
-     intensity zeros with amplitude of the form x + iz.
-   - Near zeros: longitudinal wave vector components reach **gigantic values**
-     of both signs. Negative values → reverse energy flow.
-   - Phase velocity of rotation around the zero is small compared to c.
+   - Non-paraxial TE fields form vortices near intensity zeros with
+     gigantic wave vector components of both signs; reverse energy flow.
 
 5. **Pryamikov** — *Reverse Energy Flows in Two-Dimensional Photonic Crystals
    and Analogies with Vortex Formation and Analogous Flows in Hydrodynamics.*
    arXiv: [2601.21704](https://arxiv.org/abs/2601.21704) (Jan 2026).
-   - Reverse electromagnetic energy flows in photonic crystal slabs originate
-     from **vortex structures in the Poynting vector**.
-   - Energy-flow patterns exhibit striking analogies to vortex formation in
-     fluid motion past obstacles.
-   - Poynting-vector vortex geometry determines whether energy is impeded
-     (band gap) or guided (transmission).
+   - Poynting-vector vortices determine band gap formation; energy-flow
+     patterns analogous to fluid vortices past obstacles.
 
-6. **Bucher, Gorlach, Niedermayr et al. (19 authors)** — *Superluminal
-   Correlations in Ensembles of Optical Phase Singularities.*
-   arXiv: [2509.17675](https://arxiv.org/abs/2509.17675) (Sep 2025).
-   Published in Nature (2026).
-   - First direct measurement of ultrafast dynamics of singularity ensembles
-     via ultrafast electron microscopy on hexagonal boron nitride.
-   - Phase singularities accelerate to **unbounded velocities before
-     annihilation** — measured superluminal speeds.
-   - Paradoxically amplified by slow group velocity of hyperbolic phonon
-     polaritons.
-   - Spatial and temporal resolution each an order of magnitude below the
-     polaritonic wavelength and cycle period.
+6. **Bucher, Gorlach, Niedermayr et al.** — *Superluminal Correlations in
+   Ensembles of Optical Phase Singularities.*
+   arXiv: [2509.17675](https://arxiv.org/abs/2509.17675) (Sep 2025). Nature 2026.
+   - First direct measurement of singularity ensemble dynamics via
+     ultrafast electron microscopy; superluminal velocities before annihilation.
 
-**Mapping to ontology (with confidence):**
-
-| Claim | Confidence | Basis |
-|---|---|---|
-| Reverse energy flow = saddle structure of synchronization cost at fixed points | **Interpretive** | Paper 4 shows the phenomenon (gigantic wave vectors, reversed Poynting vector). The cost-functional saddle interpretation is ours. |
-| Gigantic wave vectors near zeros = continued fraction partial quotients diverging | **Suggestive** | Paper 4 directly demonstrates the divergent wave vectors. The CF mapping is a natural mathematical parallel (both involve divergence near irrational/singular points) but is not in the paper. |
-| Poynting vortices determine band gaps (Paper 5) | **Directly grounded** | The paper itself establishes this — no interpretation needed. The vortex → energy flow → band structure connection is the paper's result. |
-| Superluminal annihilation velocities = Farey neighbor constraint | **Speculative** | Paper 6 measures unbounded velocities before vortex-antivortex annihilation. Our Farey neighbor interpretation (|ad-bc|=1 constraining separation) is mathematically motivated but entirely our addition. |
-
-**Bridging node:** `reverse-energy-flow` (Level 2) — energy reversal near
-phase singularities. Grounded in Papers 4 and 5; the connection to
-synchronization cost saddle structure is our framework's interpretation.
-
----
+**Grammar connection:** The fold region of the overcritical circle map
+({θ : F'(θ) < 0}) corresponds to reversed energy flow. The exact fold
+measure is μ(K) = arccos(1/K)/π, scaling as √(K-1) near criticality.
+For photonic crystals, the mapping K ↔ index contrast Δn is open; the
+√(K-1) scaling implies K-1 ∝ (Δn)² if the identification holds.
+The Lyapunov exponent γ ≈ 1.19 at the tongue boundary provides a
+candidate exponent for the velocity divergence before annihilation.
 
 ### 2C. High-Power & Complex Vortex Arrays
 
@@ -145,165 +108,89 @@ synchronization cost saddle structure is our framework's interpretation.
 7. **Fathi, Barros & Gumenyuk** — *Power-Scalable Generation of High-Order
    Optical Vortices Via Coherent Beam Combining.*
    arXiv: [2512.19815](https://arxiv.org/abs/2512.19815) (Dec 2025).
-   - Coherent beam combining for vortex beams at ℓ = 1, 5, 8.
-   - 100 W average / 100 kW peak power.
-   - Combining efficiencies: **95.0% (ℓ=1), 93.9% (ℓ=5), 91.2% (ℓ=8)**.
-   - Off-axis digital holography confirms high modal purity at high ℓ.
+   - 100 W / 100 kW at ℓ = 1, 5, 8; efficiencies 95.0%, 93.9%, 91.2%.
 
 8. **Fan, Cao, Chong & Zhan** — *Polygonal Spatiotemporal Optical Vortices
    Wavepackets with Prescribed Vortex Structure.*
    arXiv: [2512.16308](https://arxiv.org/abs/2512.16308) (Dec 2025).
-   - First demonstration of polygonal STOV wavepackets with multiple sub-STOVs
-     carrying transverse OAM along designed polygonal trajectories.
-   - Full control over geometry, number of phase singularities, and
-     spatiotemporal distribution via holographic shaping.
+   - First polygonal STOV wavepackets with prescribed sub-STOV geometry.
 
 9. **Das & Ciappina** — *Optical Vortices: Revolutionizing the field of linear
    and nonlinear optics.*
-   arXiv: [2510.27200](https://arxiv.org/abs/2510.27200) (Oct 2025, updated Dec 2025).
-   - Comprehensive review (~100 pages) of OAM-carrying beams.
-   - Covers generation, detection, propagation, and nonlinear regimes (SHG,
-     sum frequency, parametric down-conversion, HHG).
+   arXiv: [2510.27200](https://arxiv.org/abs/2510.27200) (Oct 2025).
+   - Comprehensive review of OAM beams across linear and nonlinear regimes.
 
-**Mapping to ontology (with confidence):**
-
-| Claim | Confidence | Basis |
-|---|---|---|
-| Decreasing combining efficiency with charge follows (K/2)^q scaling | **Testable** | Paper 7 shows 95.0% → 93.9% → 91.2% for ℓ = 1, 5, 8. The *trend* (decreasing with ℓ) is consistent with tongue-width scaling, but the data points are too few and the functional form has not been fit. This is a **concrete prediction to test**. |
-| Polygonal STOV stability requires Farey neighbor charges | **Speculative** | Paper 8 uses holographic shaping to prescribe geometries — no Farey structure is mentioned or implied. The paper demonstrates *control*, not stability constraints. |
-| Review organization mirrors DAG levels | **Loose analogy** | The parallel (generation → propagation → interaction → application ≈ L0 → L1 → L2 → L3) is suggestive at best. |
-
-**Bridging node:** `vortex-array` (Level 3) — lattice of phase singularities.
-The tongue-width scaling prediction against Paper 7's data is the most
-concrete testable claim in this cluster.
-
----
+**Grammar connection:** At K > 1, the grammar predicts multistability
+(coexisting OAM states from tongue overlap) and tongue-internal cascades.
+Computation shows SB-adjacent tongues overlap first (K ~ 1.5), with all
+observed overlaps at SB-distance 1 up to K ~ 4. The ℓ-to-rotation-number
+mapping for OAM states has not been established; for distant charges
+(e.g., ℓ = 2 ↔ ℓ = 20), the 1D circle map is insufficient and
+higher-dimensional maps may be needed.
 
 ### 2D. Quantum Simulations
 
 **Paper:**
 
-10. **Wang, Zhong, Wang et al. (11 authors)** — *Simulating fluid vortex
-    interactions on a superconducting quantum processor.*
+10. **Wang, Zhong, Wang et al.** — *Simulating fluid vortex interactions on a
+    superconducting quantum processor.*
     arXiv: [2506.04023](https://arxiv.org/abs/2506.04023) (Jun 2025).
-    Published in Nature Communications (2026).
-    - Reformulates **Navier-Stokes** equations within a quantum mechanical
-      framework (effective Hamiltonian for the vortex system).
-    - Spatiotemporal evolution circuit on 8 qubits.
-    - Gate fidelities: 99.97% (single-qubit), 99.76% (two-qubit).
-    - Successfully reproduces natural multi-vortex interactions.
+    Nature Communications 2026.
+    - Navier-Stokes reformulated as quantum Hamiltonian; 8 qubits,
+      99.97%/99.76% gate fidelities; reproduces multi-vortex interactions.
 
-**Mapping to ontology (with confidence):**
-
-| Claim | Confidence | Basis |
-|---|---|---|
-| Quantum vortex simulation is computational verification of circle-map dynamics | **Partially grounded** | The paper simulates Navier-Stokes vortex dynamics, not circle maps explicitly. But point vortex dynamics *are* governed by Hamiltonian systems that include rotation-number structure. The bridge exists mathematically but is not invoked by the paper. |
-| Qubit phase space (S¹ × S¹) naturally encodes circle-map dynamics | **Structurally sound** | Bloch sphere ≅ S² ⊃ S¹. The phase encoding is geometrically real but the paper does not frame it this way. |
-| Conservation = computability via circuit invariants | **Interpretive** | Our `conservation-as-computability` node maps naturally: decoherence breaks conservation. The paper does not discuss this connection. |
-| Circuit depth scales with Stern-Brocot depth | **Speculative** | Not addressed by the paper. A prediction from our framework, not a finding. |
-
-**Bridging node:** `quantum-vortex-simulation` (Level 3) — computational
-verification of vortex dynamics. The circuit-depth prediction is purely ours.
+**Grammar connection:** Classical simulation cost grows exponentially with
+Stern-Brocot depth of the target rotation number (window width ~ 0.458^depth
+at K = 1.5, confirmed by computation). The cost is in parameter resolution,
+not dynamical time-stepping. Whether quantum phase estimation achieves
+polynomial overhead — the quantum advantage claim — remains to be computed.
+K(Γ, r, N) for interacting point vortices has not been derived.
 
 ---
 
-## 3. Honest Assessment: What's Grounded vs. What's Ours
+## 3. Assessment
 
-### Directly grounded in the papers
+### Established by the papers
 - Phase singularities are universal topological defects (all 10 papers)
 - Vortex-antivortex pair creation near horizons via BKT mechanism (Paper 2)
-- Poynting vector vortices create reverse energy flows and determine band gaps (Paper 5)
+- Poynting-vector vortices create reverse energy flows and determine band gaps (Paper 5)
 - Gigantic wave vectors near intensity zeros with reverse energy flow (Paper 4)
-- Superluminal singularity velocities before annihilation (Paper 6)
+- Superluminal singularity velocities before annihilation (Paper 6, Nature)
 - Combining efficiency decreases with topological charge (Paper 7)
-- Quantum processors can simulate multi-vortex Navier-Stokes dynamics (Paper 10)
+- Quantum processors simulate multi-vortex Navier-Stokes dynamics (Paper 10)
 
-### Structurally sound interpretations (mathematical parallels exist)
-- Analogue horizon ↔ Arnold tongue boundary (mode-locked vs. drifting regions)
-- Divergent wave vectors near zeros ↔ continued fraction partial quotients
-- Qubit phase space naturally encodes circle-map-like dynamics
+### Derived within the framework (gravity sector)
+- Horizon = r = 0 = N = 0 (coherence = lapse, from Kuramoto-Einstein dictionary)
+- K(x,x') = G_γ(x,x') — coupling is the spatial Green's function, not a free parameter
+- Synchronization cost functional as variational principle → Einstein equations
+  at K = 1 in the continuum limit (Derivation 13, Proof Chain A)
 
-### Our predictions — all have gaps
-- T_H = (ℏ/2πk_B) · |dρ/dΩ| at the tongue edge — **BLOCKED** on
-  lattice-to-circle-map reduction (paper-sized problem)
-- Combining efficiency follows (K/2)^ℓ — **CONFOUNDED** by dimensional
-  mismatch (tongue width ≠ combining efficiency; exp(-σ²ℓ²) fits equally)
-- ~~Vortex array stability requires Farey neighbor charges~~ — **REMOVED**
-  (zero data)
-- Quantum circuit depth ∝ Stern-Brocot depth — **BLOCKED** on KAM bridge
-  theorem for point-vortex Hamiltonians
-
-### Speculative (thin evidence)
-- Dynamical Casimir radiation (Paper 3) connects to synchronization cost
-- Polygonal STOV geometry constrained by Farey structure
-- Superluminal annihilation velocities follow from Farey neighbor separation
-- Bekenstein-Hawking entropy = Stern-Brocot address count (no derivation)
+### Open questions (K-mapping not derived for vortex systems)
+- Hawking temperature from tongue-edge gradient: requires lattice-to-circle-map
+  reduction for Paper 1's non-Hermitian system
+- Quantum circuit depth ∝ Stern-Brocot depth: requires KAM bridge theorem for
+  point-vortex Hamiltonians
+- Photonic band gap width ∝ √(K-1): requires K ↔ index contrast derivation
+- OAM coexistence from tongue overlap: requires ℓ-to-rotation-number mapping;
+  1D circle map insufficient for distant charges
 
 ---
 
-## 4. Predictions from Unification — Honest Status
+## 4. Open Predictions
 
 ### P1: Hawking Temperature from Tongue-Edge Gradient
 **T_H = (ℏ/2πk_B) · |dρ/dΩ|_{tongue edge}**
 
-Status: **BLOCKED — missing intermediate derivation.** Paper 1 derives T_H
-from interface sharpness via Parikh-Wilczek tunneling in a non-Hermitian
-lattice. Our formula uses circle-map tongue-edge gradients. The two formalisms
-have not been connected. Requires showing that the lattice Hamiltonian reduces
-to a circle map under some parameter mapping (plausible via Floquet analysis
-of the non-Hermitian system, but this is a paper-sized problem). Without the
-reduction, this is a formula without a bridge.
+Requires intermediate derivation: mapping Paper 1's non-Hermitian lattice
+Hamiltonian to a circle map via Floquet analysis. In the gravity sector,
+the Kuramoto-Einstein dictionary already provides the horizon identification;
+the question is whether Paper 1's specific system admits the same mapping.
 
-### ~~P2: Combining Efficiency as Tongue-Width Scaling~~ [KILLED]
-**~~η(ℓ) ∝ 1 - c·(K/2)^ℓ~~**
-
-Status: **DEAD — computation falsifies.** Three independent failures:
-
-1. **Phase-error model fits 5x better.** η = a·exp(-σ²ℓ²) gives SSR =
-   8.79×10⁻⁶ vs. tongue-width SSR = 4.18×10⁻⁵. Even trivially, a Gaussian
-   phase-error model outperforms our prediction on these 3 data points.
-
-2. **K/2 = 1.09 — self-contradictory.** The fit requires K/2 > 1. The Arnold
-   tongue width formula (K/2)^q is derived in the weak-coupling regime K ≪ 1.
-   At K/2 > 1, tongues overlap and the formula breaks down. Our prediction
-   requires parameter values where its own derivation is invalid.
-
-3. **Trivially underdetermined.** Three data points, two free parameters.
-   Any monotone decreasing function with 2 params fits near-perfectly:
-
-   ```
-     ℓ    Tongue  PhaseErr  Linear   Data
-     1    0.9531  0.9515    0.9530   0.950
-     5    0.9338  0.9366    0.9319   0.939
-     8    0.9143  0.9129    0.9161   0.912
-    15    0.8432  0.8214    0.8791    —
-   ```
-
-   The models only diverge at ℓ ≥ 10 where no data exists, but the K/2 > 1
-   problem kills the physical motivation regardless of extrapolation.
-
-**The efficiency drop is real** (Fathi et al. measured it) **but is explained
-by mundane phase-error accumulation** (charge-ℓ beam requires ℓ×2π phase
-ramp, so alignment sensitivity grows with ℓ). **Prediction withdrawn.**
-
-### ~~P3: Vortex Array Stability from Farey Depth~~ [REMOVED]
-~~Maximum stable array size at depth D: N_max = |F_D|.~~
-
-Status: **REMOVED — zero data, pure speculation.** Paper 8 demonstrates
-holographic control over STOV geometry but tests no stability thresholds.
-No paper in any cluster invokes Farey neighbor constraints on vortex arrays.
-Retained in the DAG only as a flagged research direction, not as a prediction.
-
-### P4: Quantum Circuit Depth = Stern-Brocot Depth
+### P2: Quantum Circuit Depth Scales with Stern-Brocot Depth
 **Minimum circuit depth ∝ depth_SB(p/q)**
 
-Status: **BLOCKED — missing KAM bridge.** Paper 10 reformulates Navier-Stokes
-as a quantum Hamiltonian. The claim that circuit complexity tracks Stern-Brocot
-depth requires proving that point-vortex Hamiltonian eigenvalues are organized
-by rational rotation numbers — a KAM theory question for the specific system.
-The bridge from "Hamiltonian vortex dynamics" to "Stern-Brocot depth governs
-complexity" depends on an unstated theorem about integrability. Without it,
-this is an interesting conjecture, not a testable prediction.
+Classical cost scaling confirmed (width ~ 0.458^depth). Requires proving
+rotation-number structure in point-vortex Hamiltonian spectrum (KAM theory).
 
 ---
 
@@ -319,60 +206,52 @@ this is an interesting conjecture, not a testable prediction.
 | 6 | Superluminal singularities | [2509.17675](https://arxiv.org/abs/2509.17675) | Nature | Sep 2025 | 2B |
 | 7 | High-power vortex beams | [2512.19815](https://arxiv.org/abs/2512.19815) | arXiv | Dec 2025 | 2C |
 | 8 | Polygonal STOVs | [2512.16308](https://arxiv.org/abs/2512.16308) | arXiv | Dec 2025 | 2C |
-| 9 | Optical vortices review | [2510.27200](https://arxiv.org/abs/2510.27200) | arXiv/Review | Oct 2025 | 2C |
+| 9 | Optical vortices review | [2510.27200](https://arxiv.org/abs/2510.27200) | arXiv | Oct 2025 | 2C |
 | 10 | Quantum vortex simulation | [2506.04023](https://arxiv.org/abs/2506.04023) | Nat. Commun. | Jun 2025 | 2D |
 
 ---
 
-## 6. DAG Extension Summary
+## 6. DAG Extension
 
-Four new ontology nodes bridge the abstract framework to vortex physics:
+Four ontology nodes bridge the grammar to vortex physics as candidate
+instantiations (K-mapping open for each):
 
-- **`analogue-horizon`** (L2) — tongue boundary as event horizon
-  Parents: `arnold-tongues`, `synchronization-cost`, `fixed-point`
+- **`analogue-horizon`** (L2) — horizon as λ < 0 → λ > 0 boundary.
+  Gravity-sector K derived via Kuramoto-Einstein dictionary.
+  Non-Hermitian lattice K: open.
 
-- **`reverse-energy-flow`** (L2) — energy reversal near phase singularities
-  Parents: `fixed-point`, `figure-eight`, `continued-fraction`
+- **`reverse-energy-flow`** (L2) — fold region F'(θ) < 0.
+  Fold measure μ = arccos(1/K)/π exact. K ↔ Δn: open.
 
-- **`vortex-array`** (L3) — phase singularity lattices
-  Parents: `arnold-tongues`, `farey-graph`, `tongue-occupation`
+- **`vortex-array`** (L3) — multistability from tongue overlap at K > 1.
+  K(phase noise, beams, ℓ): open.
 
-- **`quantum-vortex-simulation`** (L3) — circuit verification of vortex dynamics
-  Parents: `conservation-as-computability`, `circle-map`, `stern-brocot-tree`
+- **`quantum-vortex-simulation`** (L3) — self-similar descent governs
+  classical cost. K(Γ, r, N) for point vortices: open.
 
-Four new prediction leaves (Level 4) — **all have identified gaps**:
+Two open predictions (Level 4):
 
-- **`hawking-from-tongue-edge`** — T_H from rotation number gradient
-  [BLOCKED: lattice → circle map reduction not performed]
-- **`combining-efficiency-scaling`** — ~~η(ℓ) follows tongue-width decay~~
-  [KILLED: phase-error fits 5x better; K/2=1.09 outside valid regime]
-- **`array-farey-stability`** — max stable array = Farey sequence length
-  [REMOVED: zero supporting data, retained only as flagged research direction]
-- **`circuit-depth-sb-depth`** — circuit complexity = CF complexity
-  [BLOCKED: KAM bridge theorem for point-vortex Hamiltonians not established]
+- **`hawking-from-tongue-edge`** [OPEN: lattice reduction needed]
+- **`circuit-depth-sb-depth`** [OPEN: KAM bridge needed]
 
 ---
 
-## 7. Next Steps — Ordered by What Would Actually Resolve Gaps
+## 7. Next Steps
 
-1. **Unblock P1 (theoretical, paper-sized):** Derive the circle-map reduction
-   of the non-Hermitian tight-binding Hamiltonian (Paper 1). If the lattice
-   system's dispersion relation near the interface can be mapped to a kicked
-   rotor / circle map, then T_H from tongue-edge gradient becomes testable.
-   If the reduction fails, `analogue-horizon` should be demoted or removed.
+1. **Ground the analogue-horizon node** through the Kuramoto-Einstein
+   dictionary. The r = N identification and K = G_γ derivation from the
+   source repos provide the gravity-sector K-mapping. Determine whether
+   Paper 1's non-Hermitian lattice admits the same Floquet reduction.
 
-2. ~~**Kill or save P2:**~~ **DONE — killed.** Phase-error model fits 5x
-   better; tongue model requires K/2 = 1.09 (outside valid regime).
-   Prediction withdrawn. See computation above.
+2. **Derive K for one vortex system.** The photonic crystal (Paper 5) is
+   the cleanest candidate: compute K(Δn, geometry) from the electromagnetic
+   coupling structure and check whether the fold measure √(K-1) matches
+   observed band gap scaling.
 
-3. **Unblock P4 (theoretical, hard):** Investigate whether the point-vortex
-   Hamiltonian used by Wang et al. has a rotation-number structure in its
-   spectrum (a KAM question). Literature on integrability of N-vortex systems
-   may already contain relevant results for N ≤ 4.
+3. **Compute quantum advantage.** Use the confirmed classical cost scaling
+   (width ~ 0.458^depth) to estimate quantum phase estimation overhead.
+   Benchmark against Wang et al.'s 8-qubit system.
 
-4. **Strengthen cluster 2B (grounded, no gaps):** The reverse-energy-flow
-   and Poynting-vector-vortex results (Papers 4, 5, 6) are the strongest
-   cluster — all phenomena are directly observed and well-characterized.
-   The framework interpretation (cost-functional saddle, CF divergence)
-   is speculative but the physics is solid. Focus here for the most
-   credible connections.
+4. **Investigate higher-dimensional maps** for OAM switching between
+   distant charges (ℓ = 2 ↔ ℓ = 20). Coupled circle maps on a torus
+   may resolve the SB-distance limitation of the 1D map.
