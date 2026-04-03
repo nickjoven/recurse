@@ -401,12 +401,222 @@ ground from which any extension must be justified.
 
 ---
 
-## 9. What This Does Not Yet Cover
+## 9. The Algebraic Collapse at K > 1
 
-**K > 1** — the overcritical regime. The map folds. Tongues overlap.
-Chaos appears. Period-doubling cascades emerge (governed by the Feigenbaum
-constants, which are already in the ontology as Level 0 primitives). The
-devil's staircase framework no longer applies directly, but the underlying
+### What breaks
+
+At K ≤ 1, the circle map is a **homeomorphism** — a continuous bijection
+with continuous inverse. It preserves the topological structure of S¹.
+Every orbit type is classified cleanly by a single rotation number. The
+devil's staircase is a well-defined function: one Ω, one ρ.
+
+At K > 1, the map is no longer injective. It has **critical points** — values
+of θ where the derivative vanishes and changes sign. The map **folds** the
+circle onto itself: two distinct phases can be sent to the same image.
+
+This single failure — loss of injectivity — cascades into the destruction
+of four algebraic properties that the K ≤ 1 framework depends on:
+
+**1. The staircase ceases to be a function.**
+
+At K ≤ 1, the rotation number ρ(Ω) is monotone non-decreasing: increasing
+the bare frequency never decreases the effective frequency. This monotonicity
+follows from the fact that the map preserves the circular order of points.
+
+At K > 1, the map can reverse circular order (the fold crosses points over
+each other). The rotation number ρ(Ω) is **no longer monotone**. It can
+decrease as Ω increases. The devil's staircase develops **overhangs** —
+it bends back on itself. A single value of ρ can be achieved at multiple
+non-contiguous intervals of Ω.
+
+The graph of ρ(Ω) is no longer the graph of a function. It is a **relation**.
+
+**2. Tongues overlap.**
+
+At K ≤ 1, the Arnold tongues are disjoint: the tongue for p/q and the tongue
+for p'/q' do not intersect (they are separated by the gap containing
+irrationals between p/q and p'/q' in the Farey sequence). The Farey neighbor
+condition |pq' - p'q| = 1 governs adjacency — neighboring tongues touch
+only at K = 1, exactly at the boundary.
+
+At K > 1, tongues **cross into each other's territory**. A single parameter
+value (Ω, K) can lie inside the tongue for p/q *and* inside the tongue for
+p'/q' simultaneously. The Farey neighbor constraint, which enforced
+separation, is violated.
+
+Physically: the same oscillator, at the same parameter values, can lock to
+*either* of two different frequencies depending on initial conditions. This
+is **multistability** — and it has no counterpart in the K ≤ 1 theory.
+
+**3. The conjugacy to rotation breaks.**
+
+The Denjoy theorem guarantees that for K ≤ 1 (smooth enough homeomorphisms),
+every irrational rotation number corresponds to a map that is topologically
+conjugate to a rigid rotation. The dynamics, however complex they look, are
+equivalent to simple rotation by a coordinate change.
+
+At K > 1, this theorem does not apply. The fold creates orbits that are not
+conjugate to any rotation. Period-doubling cascades, intermittency, and
+chaotic trajectories have no rotational equivalent. The topological
+classification scheme (by rotation number alone) is **insufficient** to
+describe the dynamics.
+
+**4. Self-consistency becomes multi-valued.**
+
+At K ≤ 1, the self-consistency condition uniquely determines ρ: given
+(Ω, K), the system finds one rotation number. The dynamics are
+deterministic in parameter space.
+
+At K > 1, the self-consistency condition has **multiple solutions**.
+Several rotation numbers are simultaneously consistent with the same
+parameters. Which one the system selects depends on its history — the
+initial condition, the path through parameter space, hysteresis. The
+rotation number is no longer a function of parameters; it is a function
+of parameters **and history**.
+
+### The precise algebraic statement
+
+Let F: R → R be the lift of the circle map, satisfying F(x+1) = F(x) + 1.
+
+At K ≤ 1, F is **strictly increasing**: F'(x) > 0 for all x (except at
+most one point where F'(x) = 0 at K = 1). This makes f: S¹ → S¹ a
+homeomorphism.
+
+At K > 1, F has **local extrema**: there exist x₁ < x₂ such that
+F'(x₁) = 0, F''(x₁) < 0 (local max) and F'(x₂) = 0, F''(x₂) > 0
+(local min). The map f is a degree-1 endomorphism but not a homeomorphism.
+
+The fold region is the interval [x₁, x₂] where F is decreasing. Its width
+grows as K - 1. In this region, two points are mapped to the same image:
+F(x₁ - δ) = F(x₂ + δ') for appropriate δ, δ'.
+
+The rotation number ρ = lim_{n→∞} Fⁿ(x)/n still exists for every x
+(this is a theorem — the limit exists for degree-1 continuous maps of the
+circle). For a given map (fixed Ω, K), this limit is the same for
+*almost every* initial condition x. But the critical orbits (those passing
+through the fold) can shadow different periodic orbits, creating the
+coexistence of attractors that is multistability.
+
+### What survives the collapse
+
+The collapse is not total. Three structures persist through K > 1:
+
+**The Stern-Brocot tree is arithmetic, not dynamic.** It enumerates the
+rationals by the mediant operation. This structure exists independently of
+any dynamical system. At K > 1, the rationals don't change — what changes
+is how the dynamics *uses* them. The tree still classifies which mode-locked
+islands exist. It no longer guarantees they are disjoint or uniquely
+accessible.
+
+**Continued fractions still govern approximation.** The best rational
+approximants to any real number are still the Stern-Brocot convergents.
+This remains true at K > 1 because it is a theorem about numbers, not
+about maps. What changes is the physical consequence: at K ≤ 1, the best
+approximant determines which tongue captures an irrational orbit. At K > 1,
+multiple tongues compete, and the "winner" depends on basin geometry.
+
+**The widest tongues persist.** The tongues with small q (1/1, 1/2, 1/3,
+2/3) — the shallowest levels of the Stern-Brocot tree — are the widest.
+They grow as (K/2)^q, so small-q tongues dominate at any K. Even as
+tongues overlap and internal structure develops, the large-scale
+organization by q persists. The low-order resonances remain the most
+prominent features of the parameter space.
+
+### What emerges
+
+The fold creates new structure that has no K ≤ 1 counterpart:
+
+**Period-doubling within tongues.** Inside the p/q tongue, for K
+sufficiently above 1, the period-q attracting orbit loses stability and
+bifurcates to period 2q, then 4q, then 8q, ..., accumulating at a
+Feigenbaum point where the orbit becomes chaotic. The cascade rate converges
+to δ = 4.6692... (the Feigenbaum constant, already in the ontology at
+Level 0). Each tongue becomes a **microcosm** of the logistic map.
+
+**Chaotic bands.** Between the remnant mode-locked islands, and beyond the
+Feigenbaum accumulation points within tongues, there are parameter regions
+with positive Lyapunov exponent — genuine chaos. The measure of these chaotic
+regions grows with K - 1.
+
+**Periodic windows within chaos.** Inside the chaotic bands, there are
+narrow windows of periodic behavior — smaller mode-locked islands. These
+windows are organized by the **same Stern-Brocot structure** that organized
+the original Arnold tongues. The tree recapitulates at every scale: within
+each chaotic band, the largest windows have the smallest q, and the window
+widths scale with continued-fraction depth.
+
+This is the critical observation: the Stern-Brocot tree does not vanish at
+K > 1. It **descends**. It reappears inside each chaotic region, governing
+the hierarchy of periodic windows just as it governed the hierarchy of
+Arnold tongues at K < 1. The Feigenbaum renormalization group is the
+mechanism of this descent — each period-doubling cascade carries the
+tree's structure to a smaller scale.
+
+### The diagnostic that replaces the staircase
+
+At K ≤ 1, the devil's staircase ρ(Ω) is the complete diagnostic: it tells
+you everything about the dynamics.
+
+At K > 1, the rotation number alone is insufficient. The replacement is the
+**Lyapunov exponent** λ(Ω, K):
+
+```
+    λ = lim_{n→∞} (1/n) Σ log|f'(θᵢ)|
+```
+
+This measures the average rate of divergence of nearby orbits.
+
+- λ < 0 : mode-locked (attracting periodic orbit) — inside a tongue
+- λ = 0 : critical boundary, or quasiperiodic (at K ≤ 1)
+- λ > 0 : chaotic — sensitive dependence on initial conditions
+
+The graph of λ(Ω) at K > 1 replaces the devil's staircase as the primary
+diagnostic. It is negative on the mode-locked islands, positive in the
+chaotic bands, and zero at the transitions. The tongue structure is still
+visible (the dips to λ < 0), but the chaotic regions (λ > 0) are new.
+
+### What we need but do not yet have
+
+To extend the framework through K > 1, we need:
+
+1. **The Lyapunov exponent as a DAG-level concept.** It replaces ρ(Ω) as
+   the primary observable. The existing node `rotation-number` (L1) needs a
+   sibling: `lyapunov-exponent` (L1), parented by `circle-map` and `parabola`.
+
+2. **The period-doubling connection to tongues.** The existing node
+   `period-doubling-cascade` (L1) is currently parented only by `parabola`
+   and `feigenbaum-constants`. It needs a parent edge to `arnold-tongues` —
+   because period-doubling occurs *within* tongues at K > 1.
+
+3. **The self-similar descent.** A new concept: the Stern-Brocot structure
+   reappearing at smaller scales within chaotic bands. This connects
+   `stern-brocot-tree` to `period-doubling-cascade` in a way the current
+   DAG does not represent.
+
+4. **Multistability.** A new concept: the coexistence of multiple
+   attractors at the same parameter values. This is the direct consequence
+   of tongue overlap and has no K ≤ 1 analogue.
+
+These four additions would make the K > 1 regime representable in the DAG.
+The vortex bridge nodes (`analogue-horizon`, `reverse-energy-flow`,
+`vortex-array`, `quantum-vortex-simulation`) could then be re-parented
+through the K > 1 structure rather than through the K < 1 tongue-width
+formulas that the P2 computation showed are inapplicable.
+
+References:
+
+- Glass & Sun, "Bifurcations in flat-topped maps and the control of
+  cardiac chaos", Int. J. Bifurcation and Chaos **4** (1994) 1061–1076.
+  [Tongue overlap in non-invertible circle maps.]
+- MacKay & Tresser, "Transition to topological chaos for circle maps",
+  Physica D **19** (1986) 206–237.
+  [What happens to rotation numbers when the map folds.]
+- Cvitanović, Gunaratne & Vinson, "On the mode-locking universality for
+  critical circle maps", Nonlinearity **3** (1990) 873–885.
+  [Scaling of tongues and periodic windows through the critical line.]
+- Lanford, "A computer-assisted proof of the Feigenbaum conjectures",
+  Bull. Amer. Math. Soc. **6** (1982) 427–434.
+  [Rigorous proof that the Feigenbaum cascade is universal.]
 number-theoretic structure (Stern-Brocot tree, continued fractions, Farey
 graph) persists in the organization of the remaining mode-locked islands
 amid chaos.
