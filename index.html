@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>recurse</title>
+<style>
+:root {
+  --fg: #1a1a1a;
+  --bg: #fdfdfd;
+  --accent: #8b0000;
+  --muted: #666;
+  --rule: #ddd;
+  --tree-line: #ccc;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font: 16px/1.6 'Georgia', serif;
+  color: var(--fg);
+  background: var(--bg);
+  max-width: 72ch;
+  margin: 3rem auto;
+  padding: 0 1.5rem;
+}
+h1 { font-size: 1.5rem; font-weight: normal; letter-spacing: 0.02em; margin-bottom: 0.25rem; }
+.byline { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
+h2 {
+  font-size: 0.85rem;
+  font-weight: normal;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 0.3rem;
+  margin: 2.5rem 0 1rem;
+}
+
+/* Tree styles */
+.tree { list-style: none; padding-left: 0; font-size: 0.95rem; }
+.tree ul { list-style: none; padding-left: 1.5rem; position: relative; }
+.tree ul::before {
+  content: '';
+  position: absolute;
+  left: 0.5rem;
+  top: 0;
+  bottom: 0.8rem;
+  border-left: 1px solid var(--tree-line);
+}
+.tree li { position: relative; padding: 0.15rem 0; }
+.tree ul > li::before {
+  content: '';
+  position: absolute;
+  left: -1rem;
+  top: 0.75rem;
+  width: 0.8rem;
+  border-bottom: 1px solid var(--tree-line);
+}
+.tree li.last::before {
+  border-left: none;
+}
+.node { display: inline-block; margin-right: 0.4rem; font-size: 0.85rem; color: var(--muted); }
+.tree a { color: var(--fg); text-decoration: none; border-bottom: 1px solid var(--rule); }
+.tree a:hover { color: var(--accent); border-color: var(--accent); }
+.tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 0.05rem 0.35rem;
+  margin-left: 0.4rem;
+  vertical-align: middle;
+}
+.desc { color: var(--muted); font-size: 0.85rem; margin-left: 0.3rem; }
+
+/* Thumbnails */
+.thumb-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+}
+.thumb-grid figure { margin: 0; }
+.thumb-grid img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  border: 1px solid var(--rule);
+}
+.thumb-grid figcaption {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-top: 0.3rem;
+}
+</style>
+</head>
+<body>
+
+<h1>recurse</h1>
+<div class="byline">Asset index</div>
+
+<h2>Publications</h2>
+
+<ul class="tree">
+  <li>
+    <span class="node">+</span>
+    <strong>Stribeck Vortex</strong>
+    <ul>
+      <li>
+        <span class="node">&mdash;</span>
+        <a href="STRIBECK_VORTEX.html">Stribeck Vortex Regime Map</a>
+        <span class="tag">html</span>
+        <span class="desc">&mdash; N. Joven, April 2026</span>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2>Figures</h2>
+
+<div class="thumb-grid">
+  <figure>
+    <a href="https://raw.githubusercontent.com/nickjoven/recurse/main/notebooks/stribeck_vortex_regime.png">
+      <img src="https://raw.githubusercontent.com/nickjoven/recurse/main/notebooks/stribeck_vortex_regime.png"
+           alt="Four-panel regime map" loading="lazy">
+    </a>
+    <figcaption>Four-panel regime map</figcaption>
+  </figure>
+  <figure>
+    <a href="https://raw.githubusercontent.com/nickjoven/recurse/main/notebooks/lyapunov_radial.png">
+      <img src="https://raw.githubusercontent.com/nickjoven/recurse/main/notebooks/lyapunov_radial.png"
+           alt="Radial Lyapunov profile" loading="lazy">
+    </a>
+    <figcaption>Radial Lyapunov profile</figcaption>
+  </figure>
+</div>
+
+<h2>Source Tree</h2>
+
+<ul class="tree">
+  <li>
+    <span class="node">+</span> <strong>notebooks/</strong>
+    <ul>
+      <li><span class="node">&mdash;</span> 01_stribeck_vortex_regime.ipynb <span class="tag">notebook</span></li>
+      <li><span class="node">&mdash;</span> 01_stribeck_vortex_regime.py <span class="tag">python</span></li>
+      <li><span class="node">&mdash;</span> stribeck_vortex_regime.png <span class="tag">image</span></li>
+      <li><span class="node">&mdash;</span> lyapunov_radial.png <span class="tag">image</span></li>
+    </ul>
+  </li>
+  <li>
+    <span class="node">+</span> <strong>seed/</strong>
+    <ul>
+      <li><span class="node">&mdash;</span> Cargo.toml <span class="tag">rust</span></li>
+      <li>
+        <span class="node">+</span> src/
+        <ul>
+          <li><span class="node">&mdash;</span> main.rs</li>
+          <li><span class="node">&mdash;</span> schemas.rs</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><span class="node">&mdash;</span> FRAMEWORK.md <span class="tag">md</span></li>
+  <li><span class="node">&mdash;</span> STRIBECK_VORTEX.md <span class="tag">md</span></li>
+  <li><span class="node">&mdash;</span> VORTEX_UNIFICATION.md <span class="tag">md</span></li>
+  <li><span class="node">&mdash;</span> GAPS.md <span class="tag">md</span></li>
+  <li><span class="node">&mdash;</span> PROPOSALS.md <span class="tag">md</span></li>
+</ul>
+
+</body>
+</html>
