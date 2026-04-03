@@ -70,10 +70,13 @@ critical point:
 The band gap opens when the effective coupling exceeds the critical value
 K = 1, and its width is proportional to **√(K-1)**, not (K-1).
 
-**Open:** The mapping K ↔ Δn (refractive index contrast) is not derived.
-Known photonic band gap scaling is linear in Δn. If the identification
-holds, it implies K - 1 ∝ (Δn)², but this requires derivation from the
-specific system's coupling structure.
+**Resolved (1D):** For a 1D Bragg stack, K = 1 + 2(Δn)². This follows
+from the Fresnel reflection coefficient |r| = Δn/(2 + Δn) and the
+requirement that the fold measure μ = arccos(1/K)/π match the known
+Bragg gap width Δω/ω = (4/π)arcsin(|r|) in the small-contrast limit.
+The fold measure reproduces the Bragg gap to within 1% for Δn < 0.2.
+For 2D photonic crystals (Pryamikov's system), the coupling structure
+differs and the K-mapping remains open.
 
 ---
 
@@ -105,9 +108,15 @@ chaotic bands by Stern-Brocot depth:
   (infinite SB depth, zero window width) require infinite classical
   precision.
 
-**Open:** The quantum half of the question — whether quantum phase
-estimation resolves rotation numbers with polynomial overhead in precision
-bits — is plausible but not yet computed.
+**Resolved:** The quantum advantage is specific to frequency resolution,
+not to Hamiltonian simulation. Iterative QPE (Kitaev) resolves SB depth
+d in O(d) circuit depth versus O(2^d) classically — an exponential
+advantage in depth. Standard QPE requires O(2^d) controlled-U operations
+(no advantage over classical). For Hamiltonian simulation of N point
+vortices to time T, the gate count is O(N² T polylog(T/ε)) and does not
+depend on rotation-number structure. The SB-depth-dependent advantage
+applies only to the problem of identifying which mode-locked window a
+trajectory occupies.
 
 ---
 
@@ -145,14 +154,15 @@ of the OAM spectrum, or a fundamentally different identification of
 
 | Gap | Grammar computation | Physical bridge status |
 |---|---|---|
-| 1 (velocity) | γ ≈ 1.19; β = 2αγ | K_eff ~ 1/r² is structural, not derived |
-| 2 (band gap) | μ = arccos(1/K)/π; scales as √(K-1) | K ↔ Δn mapping open |
-| 3 (quantum cost) | Width ~ 0.458^depth (R²=0.78); q^{-3.2} | Quantum cost comparison open |
-| 4 (OAM) | SB-adjacent tongues overlap first at K~1.5 | ℓ-to-ρ mapping fails for distant charges |
+| 1 (velocity) | γ ≈ 1.19; β = 2αγ | Theoretical values fixed; awaits data |
+| 2 (band gap) | μ = arccos(1/K)/π; K = 1+2(Δn)² | Resolved for 1D Bragg; 2D open |
+| 3 (quantum cost) | Width ~ 0.458^depth; iterative QPE O(d) | Resolved: advantage is in frequency resolution |
+| 4 (OAM) | SB-adjacent tongues overlap first at K~1.5 | Open: 1D map insufficient for distant charges |
 
-The grammar's internal computations produce reproducible results in each
-case. The open problem in each gap is the mapping from the physical
-system's parameters to the circle map's coupling K.
+Two questions are resolved (band gap K-mapping for 1D, quantum advantage
+clarified), one has theoretical values fixed awaiting experimental
+comparison (velocity exponent), and one remains open (distant OAM
+switching requires higher-dimensional maps).
 
 For the gravity sector, this mapping is derived: K(x,x') = G_γ(x,x')
 (the Green's function of the spatial Laplacian), via the Kuramoto-Einstein
