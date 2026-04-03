@@ -256,8 +256,20 @@ tongue-overlap model predicts that:
 | Quantum advantage criterion | 2303.16550, 2506.04023 | SB depth of rotation number | Yes: classical cost vs. quantum cost at different ρ |
 | OAM switching thresholds | fiber laser experiments | Tongue overlap + basin boundaries | Yes: intermediate ℓ transients during switching |
 
-Five of six resolutions survive. Gap 4 (BKT temperature) was retracted
-after computation showed BKT and Feigenbaum are different universality
-classes. Three surviving gaps (1, 2, 6) yield specific numerical targets.
-Two (3, 5) yield scaling laws. None require new mathematics beyond the
-standard K > 1 circle-map phenomenology posed in FRAMEWORK.md §9.
+## Computation Results (updated after parallel runs)
+
+| Gap | Grammar (internal math) | Bridge (K-mapping) | Verdict |
+|---|---|---|---|
+| 1 (gray-body) | *pending* | *pending* | — |
+| 2 (velocity) | γ ≈ 1.19 computable, β = 2αγ | K_eff ~ 1/r² unearned; v_s ~ λ ad hoc | Falsifiable but weakly bridged |
+| 3 (band gap) | μ = arccos(1/K)/π exact; ∝ √(K-1) | K ↔ Δn mapping unknown | **Wrong** on linearity claim |
+| 4 (BKT) | — | — | **Killed** (different universality class) |
+| 5 (quantum) | Width ~ 0.458^depth confirmed (R²=0.78); q^(-3.2) steeper than critical q^(-2) | Quantum poly cost untested | **Partially confirmed** |
+| 6 (OAM) | SB-adjacent tongues overlap first (K~1.5); ALL overlaps are SB-distance-1 | ℓ→ρ mapping fails for ℓ=2↔20 (too SB-distant for 1D map) | Grammar confirmed, application fails |
+
+**The pattern:** the grammar computes cleanly every time. The bridges fail
+every time. The framework classifies behavior correctly once K is known,
+but does not derive K for any physical system. This confirms the
+restructuring in FRAMEWORK.md §10: the framework is a grammar, not a
+prediction engine. The publishable work is deriving K(system) for each
+candidate instantiation.
