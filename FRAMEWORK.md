@@ -173,12 +173,12 @@ loop between where you are and where you go.
 The rotation number ρ(Ω, K) now depends on both parameters. It is no longer
 simply equal to Ω — the coupling can **shift** the effective frequency.
 
-**The physical picture:** imagine an oscillator with natural frequency Ω.
-Now couple it to a periodic forcing (or to another oscillator, or to a
-lattice). The coupling K measures how strongly the external signal
-interferes with the natural oscillation. The rotation number ρ measures
-what the oscillator actually does under the combined influence of its
-own frequency and the coupling.
+Concretely, consider an oscillator with natural frequency Ω coupled to
+a periodic forcing (or to another oscillator, or to a lattice). The
+coupling K measures how strongly the external signal interferes with the
+natural oscillation. The rotation number ρ measures what the oscillator
+actually does under the combined influence of its own frequency and the
+coupling.
 
 This is the setting for:
 - A pendulum driven by a periodic force
@@ -212,9 +212,10 @@ At K = 0, as described above:
 - Irrational Ω → quasiperiodic dense orbit
 - The graph of ρ(Ω) is the identity line: ρ = Ω
 
-This is the baseline. Every oscillator does its own thing. No synchronization.
-No frequency-locking. The Stern-Brocot tree classifies orbits but doesn't
-*do* anything — it's just a filing system.
+This is the baseline. Every oscillator evolves independently. There is
+no synchronization and no frequency-locking. The Stern-Brocot tree
+classifies orbits but has no dynamical effect — it serves only as a
+classification scheme.
 
 ---
 
@@ -249,26 +250,25 @@ than full measure**. There are still gaps — irrational rotation numbers
 that are not locked. These correspond to quasiperiodic orbits that survive
 the coupling.
 
-**What irrationals describe at 0 < K < 1:** the quasiperiodic orbits that
-resist synchronization. The golden ratio φ, being the most irrational,
-resists the longest. It is the last rotation number to be captured by a
-tongue. The **noble numbers** (those whose continued fraction tails are
-all 1s, like φ = [1;1,1,...]) form a hierarchy of resistance to
-mode-locking, organized by the Stern-Brocot tree.
+At 0 < K < 1, the irrationals correspond to quasiperiodic orbits that
+resist synchronization. The golden ratio φ, being the most poorly
+approximable, is the last rotation number to be captured by a tongue.
+The noble numbers (those whose continued fraction tails are all 1s,
+like φ = [1;1,1,...]) form a hierarchy of resistance to mode-locking,
+organized by the Stern-Brocot tree.
 
-**What we can observe:** frequency-locking in driven oscillators. Phase-
-locked loops in electronics. Synchronization of cardiac pacemaker cells.
-Mode-locking in lasers. Resonance capture in celestial mechanics (e.g.,
-Pluto:Neptune = 2:3, Moon's spin:orbit = 1:1). The devil's staircase has
-been directly measured in Josephson junctions and charge-density wave
+Experimental manifestations include frequency-locking in driven oscillators,
+phase-locked loops in electronics, synchronization of cardiac pacemaker
+cells, mode-locking in lasers, and resonance capture in celestial mechanics
+(e.g., Pluto:Neptune = 2:3, Moon's spin:orbit = 1:1). The devil's staircase
+has been directly measured in Josephson junctions and charge-density wave
 systems.
 
-**Self-consistency:** the rotation number ρ is determined self-consistently.
-You cannot compute it from Ω and K by a formula — you must iterate the map
+The rotation number ρ is determined self-consistently. It cannot be
+computed from Ω and K by a closed-form formula; one must iterate the map
 and take a limit. The system finds its own effective frequency through the
-interplay of its natural frequency and its coupling. This is what
-"self-consistency" means: the output (ρ) depends on the dynamics, which
-depend on the output.
+interplay of its natural frequency and its coupling: the output (ρ)
+depends on the dynamics, which depend on the output.
 
 References:
 
@@ -307,18 +307,17 @@ At K = 1:
   — they are dense but infinitely rare.
 - The staircase is a **singular function**: continuous everywhere,
   differentiable almost everywhere (with derivative 0), yet non-constant.
-  It increases without ever having a positive derivative. This is not a
-  paradox; it rises only on the measure-zero set of irrationals.
+  It increases without ever having a positive derivative — it rises only
+  on the measure-zero set of irrationals.
 
-**Why K = 1 matters:** it is the boundary between two qualitatively
-different regimes. Below K = 1, irrational rotation numbers have positive
-measure — quasiperiodic orbits occupy a finite fraction of phase space.
-At K = 1, they are squeezed to measure zero but still exist as
-topological limits. Above K = 1, the map folds, and the devil's staircase
-framework breaks.
+K = 1 is the boundary between two qualitatively different regimes. Below
+K = 1, irrational rotation numbers have positive measure — quasiperiodic
+orbits occupy a finite fraction of phase space. At K = 1, they are
+squeezed to measure zero but still exist as topological limits. Above
+K = 1, the map folds, and the devil's staircase framework breaks.
 
-**Universal scaling at K = 1:** the approach to the critical point at
-the golden ratio rotation number exhibits universal scaling exponents.
+The approach to the critical point at the golden ratio rotation number
+exhibits universal scaling exponents.
 The sequence of mode-locked intervals converging on φ from above and below
 scales with ratios related to the Feigenbaum constants and to the
 continued fraction structure. Specifically, at the golden-mean fixed
@@ -335,11 +334,11 @@ determined by the topology (the circle), the order of the inflection
 (cubic), and the number-theoretic properties of the rotation number
 (continued fraction structure).
 
-**What we can observe:** the critical transition at K = 1 has been measured
-in Josephson junction arrays, where the voltage steps (Shapiro steps) are
-the physical manifestation of Arnold tongues, and the transition from
-incomplete to complete mode-locking corresponds to the junction reaching
-its critical current.
+The critical transition at K = 1 has been measured in Josephson junction
+arrays, where the voltage steps (Shapiro steps) are the physical
+manifestation of Arnold tongues, and the transition from incomplete to
+complete mode-locking corresponds to the junction reaching its critical
+current.
 
 References:
 
@@ -382,16 +381,16 @@ References:
 
 The progression from K = 0 to K = 1 is a single story:
 
-**Integers** generate the **Stern-Brocot tree** via the **mediant**.
-The tree classifies all **rotation numbers** (periods and quasi-periods)
-of the simplest dynamical system on the **circle**. Turning on **coupling**
-(the sin term) causes rational rotation numbers to **lock** into **tongues**
-whose widths are governed by **continued fraction depth**. At the critical
-coupling K = 1, the tongues fill everything, the **devil's staircase** is
-complete, and the **irrationals** (the quasiperiodic orbits that resisted
-locking) are squeezed to measure zero — but they never vanish, and their
-structure (the golden ratio at the top, the noble numbers below) governs
-the universal scaling at the critical point.
+Integers generate the Stern-Brocot tree via the mediant. The tree
+classifies all rotation numbers (periods and quasi-periods) of the
+simplest dynamical system on the circle. Turning on coupling (the sin
+term) causes rational rotation numbers to lock into tongues whose widths
+are governed by continued fraction depth. At the critical coupling K = 1,
+the tongues fill everything, the devil's staircase is complete, and the
+irrationals (the quasiperiodic orbits that resisted locking) are squeezed
+to measure zero — but they never vanish, and their structure (the golden
+ratio at the top, the noble numbers below) governs the universal scaling
+at the critical point.
 
 Every concept in this chain is standard mathematics. Every physical
 manifestation listed above has been experimentally verified. The references
@@ -413,8 +412,8 @@ At K > 1, the map is no longer injective. It has **critical points** — values
 of θ where the derivative vanishes and changes sign. The map **folds** the
 circle onto itself: two distinct phases can be sent to the same image.
 
-This single failure — loss of injectivity — cascades into the destruction
-of four algebraic properties that the K ≤ 1 framework depends on:
+This single failure — loss of injectivity — causes four algebraic
+properties that the K ≤ 1 framework depends on to break down:
 
 **1. The staircase ceases to be a function.**
 
@@ -530,7 +529,7 @@ sufficiently above 1, the period-q attracting orbit loses stability and
 bifurcates to period 2q, then 4q, then 8q, ..., accumulating at a
 Feigenbaum point where the orbit becomes chaotic. The cascade rate converges
 to δ = 4.6692... (the Feigenbaum constant, already in the ontology at
-Level 0). Each tongue becomes a **microcosm** of the logistic map.
+Level 0). Each tongue recapitulates the structure of the logistic map.
 
 **Chaotic bands.** Between the remnant mode-locked islands, and beyond the
 Feigenbaum accumulation points within tongues, there are parameter regions
@@ -544,8 +543,8 @@ the original Arnold tongues. The tree recapitulates at every scale: within
 each chaotic band, the largest windows have the smallest q, and the window
 widths scale with continued-fraction depth.
 
-This is the critical observation: the Stern-Brocot tree does not vanish at
-K > 1. It **descends**. It reappears inside each chaotic region, governing
+The Stern-Brocot tree does not vanish at K > 1. It reappears inside each
+chaotic region at smaller scales, governing
 the hierarchy of periodic windows just as it governed the hierarchy of
 Arnold tongues at K < 1. The Feigenbaum renormalization group is the
 mechanism of this descent — each period-doubling cascade carries the
@@ -623,10 +622,10 @@ References:
 
 ### What the grammar does
 
-The circle map is the **normal form** for periodically forced oscillators
+The circle map is the normal form for periodically forced oscillators
 near resonance (Arnold 1983). The Stern-Brocot tree, Arnold tongues,
 Feigenbaum cascades, Lyapunov exponents, tongue overlap, and self-similar
-descent are the **vocabulary of possible behaviors** for such systems.
+descent constitute the vocabulary of possible behaviors for such systems.
 
 Given the coupling strength K, the grammar classifies dynamics:
 
@@ -646,7 +645,7 @@ physical system is the system-specific physics:
 
 | System | What determines K | Status |
 |---|---|---|
-| **Gravity (continuum Kuramoto)** | K(x,x') = G_γ(x,x'), the Green's function of the spatial Laplacian | **Derived** (see below) |
+| Gravity (continuum Kuramoto) | K(x,x') = G_γ(x,x'), the Green's function of the spatial Laplacian | Derived (see below) |
 | Josephson junction | Ratio of drive current to critical current | Classical textbook |
 | Cardiac pacemaker | Coupling strength between cells | Classical textbook |
 | Non-Hermitian lattice | Hopping asymmetry, gain/loss ratio | Open |
@@ -671,7 +670,7 @@ the ADM formulation of general relativity:
 | ∂ᵢψ — mean phase gradient | Nᵢ — shift vector | Phase gradients are coordinate drift |
 | Cᵢⱼ — coherence tensor | γᵢⱼ — spatial metric | Synchronization structure is geometry |
 | ω(x) — natural frequency | √(4πGρ) — Jeans frequency | Matter sets the natural frequency |
-| **K(x,x') — coupling kernel** | **G_γ(x,x') — spatial Green's function** | **Coupling propagates through geometry** |
+| K(x,x') — coupling kernel | G_γ(x,x') — spatial Green's function | Coupling propagates through geometry |
 
 The self-consistency equation on the Stern-Brocot tree, at K = 1 in the
 continuum limit, uniquely produces the Einstein field equations via

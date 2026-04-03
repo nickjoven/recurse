@@ -227,29 +227,33 @@ instantiations (K-mapping open for each):
 - **`quantum-vortex-simulation`** (L3) — self-similar descent governs
   classical cost. K(Γ, r, N) for point vortices: open.
 
-Two open predictions (Level 4):
+Two open questions (Level 4):
 
-- **`hawking-from-tongue-edge`** [OPEN: lattice reduction needed]
-- **`circuit-depth-sb-depth`** [OPEN: KAM bridge needed]
+- `hawking-from-tongue-edge` — lattice reduction needed
+- `circuit-depth-sb-depth` — KAM bridge needed
 
 ---
 
 ## 7. Next Steps
 
-1. **Ground the analogue-horizon node** through the Kuramoto-Einstein
-   dictionary. The r = N identification and K = G_γ derivation from the
-   source repos provide the gravity-sector K-mapping. Determine whether
-   Paper 1's non-Hermitian lattice admits the same Floquet reduction.
+1. **Floquet reduction of Paper 1's lattice.** Apply Floquet analysis to
+   the non-Hermitian tight-binding Hamiltonian of Munoz-Arboleda et al.
+   (2507.03826) and determine whether a circle-map reduction exists. If
+   it does, extract K(hopping asymmetry, gain/loss) and compare the
+   resulting T_H to their Parikh-Wilczek result.
 
-2. **Derive K for one vortex system.** The photonic crystal (Paper 5) is
-   the cleanest candidate: compute K(Δn, geometry) from the electromagnetic
-   coupling structure and check whether the fold measure √(K-1) matches
-   observed band gap scaling.
+2. **K-derivation for photonic crystals.** Starting from the electromagnetic
+   coupling structure in Pryamikov's 2D photonic crystal (2601.21704),
+   compute K(Δn, geometry). Compare the fold measure sqrt(K-1) to observed
+   band gap widths as a function of index contrast.
 
-3. **Compute quantum advantage.** Use the confirmed classical cost scaling
-   (width ~ 0.458^depth) to estimate quantum phase estimation overhead.
-   Benchmark against Wang et al.'s 8-qubit system.
+3. **Quantum phase estimation benchmark.** Using the confirmed classical
+   cost scaling (window width ~ 0.458^depth at K = 1.5), compute the
+   circuit depth required for quantum phase estimation to resolve rotation
+   numbers at each SB depth. Benchmark against Wang et al.'s 8-qubit
+   system (2506.04023).
 
-4. **Investigate higher-dimensional maps** for OAM switching between
-   distant charges (ℓ = 2 ↔ ℓ = 20). Coupled circle maps on a torus
-   may resolve the SB-distance limitation of the 1D map.
+4. **Coupled circle maps for distant OAM states.** Construct coupled
+   circle maps on a torus to model OAM switching between distant charges
+   (e.g., l = 2 and l = 20). Determine the minimum coupling topology
+   that produces coexistence between SB-distant tongues.

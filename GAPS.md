@@ -1,8 +1,8 @@
 # Open Questions in the Overcritical Regime
 
 Four open problems in the vortex and analogue-gravity literature where the
-K > 1 circle-map grammar provides structural predictions. Each gap is
-sourced from published papers. Computation results are stated as findings.
+K > 1 circle-map grammar may apply. Each gap is sourced from published
+papers. Computation results are stated as findings.
 
 ---
 
@@ -43,7 +43,7 @@ determine whether the circle-map exponent γ is relevant.
 
 ---
 
-## 2. Predictive Criterion for Photonic Band Gaps
+## 2. Photonic Band Gap Criterion
 
 **The problem:**
 
@@ -105,7 +105,7 @@ chaotic bands by Stern-Brocot depth:
   (infinite SB depth, zero window width) require infinite classical
   precision.
 
-**Open:** The quantum half of the prediction — that quantum phase
+**Open:** The quantum half of the question — whether quantum phase
 estimation resolves rotation numbers with polynomial overhead in precision
 bits — is plausible but not yet computed.
 
@@ -143,16 +143,16 @@ of the OAM spectrum, or a fundamentally different identification of
 
 ## Computation Findings
 
-| Gap | Grammar result | K-mapping status |
+| Gap | Grammar computation | Physical bridge status |
 |---|---|---|
 | 1 (velocity) | γ ≈ 1.19; β = 2αγ | K_eff ~ 1/r² is structural, not derived |
 | 2 (band gap) | μ = arccos(1/K)/π; scales as √(K-1) | K ↔ Δn mapping open |
 | 3 (quantum cost) | Width ~ 0.458^depth (R²=0.78); q^{-3.2} | Quantum cost comparison open |
 | 4 (OAM) | SB-adjacent tongues overlap first at K~1.5 | ℓ-to-ρ mapping fails for distant charges |
 
-The grammar's internal computations produce clean, reproducible results
-in every case. The open problem in each gap is the mapping from the
-physical system's parameters to the circle map's coupling K.
+The grammar's internal computations produce reproducible results in each
+case. The open problem in each gap is the mapping from the physical
+system's parameters to the circle map's coupling K.
 
 For the gravity sector, this mapping is derived: K(x,x') = G_γ(x,x')
 (the Green's function of the spatial Laplacian), via the Kuramoto-Einstein
