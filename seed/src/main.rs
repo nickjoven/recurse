@@ -414,6 +414,49 @@ fn main() {
             tags: &["topology", "distribution", "empirical", "bridge"],
             parent_slugs: &["arnold-tongues", "stern-brocot-address", "devils-staircase"],
         },
+
+        // ── Vortex bridge nodes ────────────────────────────────────────
+        // These nodes connect the abstract synchronization ontology to
+        // concrete vortex physics: the phase singularity is a fixed point
+        // of the phase flow, classified by rotation number (topological
+        // charge), and organized by Arnold tongue / Farey structure.
+
+        OntologyEntry {
+            level: 2,
+            slug: "analogue-horizon",
+            name: "Analogue horizon",
+            description: "The boundary of an Arnold tongue reinterpreted as an event horizon. Inside the tongue: mode-locked (subsonic, phase-coherent). Outside: drifting (supersonic, phase-incoherent). Hawking temperature maps to the synchronization cost gradient at the tongue edge: T_H ∝ |dρ/dΩ| at the mode-locking boundary. Bekenstein-Hawking entropy counts distinguishable Stern-Brocot addresses within the tongue at a given depth.",
+            symbol: Some("T_H ∝ |dρ/dΩ|"),
+            tags: &["algebra", "horizon", "analogue", "hawking", "thermodynamics"],
+            parent_slugs: &["arnold-tongues", "synchronization-cost", "fixed-point"],
+        },
+        OntologyEntry {
+            level: 2,
+            slug: "reverse-energy-flow",
+            name: "Reverse energy flow",
+            description: "Near a phase singularity (intensity zero), the Poynting vector locally reverses direction. In the synchronization framework: the cost functional has a saddle structure near fixed points where the drift term dominates the coupling term, inverting the effective force. Superoscillations (divergent local wave vectors) correspond to continued fraction partial quotients growing without bound near noble irrationals. The figure-eight (Möbius band) topology of the Klein bottle immersion creates these inversion regions.",
+            symbol: Some("S⃗_reverse"),
+            tags: &["algebra", "energy-flow", "singularity", "superoscillation", "saddle"],
+            parent_slugs: &["fixed-point", "figure-eight", "continued-fraction"],
+        },
+        OntologyEntry {
+            level: 3,
+            slug: "vortex-array",
+            name: "Vortex array",
+            description: "A lattice of phase singularities whose stability and scaling are governed by Arnold tongue width and Farey neighbor constraints. Coherent beam combining produces charge-ℓ vortices by superposing mode-locked oscillators; purity depends on tongue depth via (K/2)^q scaling. Stable arrays require nearest-neighbor charges to be Farey neighbors (|ℓ_i·q_j - ℓ_j·q_i| = 1). Polygonal spatiotemporal vortex configurations tile according to the Farey graph.",
+            symbol: None,
+            tags: &["topology", "array", "lattice", "beam-combining", "farey-neighbor"],
+            parent_slugs: &["arnold-tongues", "farey-graph", "tongue-occupation"],
+        },
+        OntologyEntry {
+            level: 3,
+            slug: "quantum-vortex-simulation",
+            name: "Quantum vortex simulation",
+            description: "Computational verification of vortex dynamics via quantum processors. Qubits (two-level systems on S¹ × S¹) natively encode circle-map phase dynamics. Conserved quantities in the vortex simulation correspond to computable invariants of the quantum circuit; decoherence = non-conservation = non-computability. Minimum circuit depth to simulate charge-ℓ interactions scales with Stern-Brocot depth of the target rotation number.",
+            symbol: None,
+            tags: &["topology", "quantum", "simulation", "verification", "circuit"],
+            parent_slugs: &["conservation-as-computability", "circle-map", "stern-brocot-tree"],
+        },
     ];
 
     let predictions: Vec<PredictionEntry> = vec![
@@ -516,6 +559,48 @@ fn main() {
             source_derivation: "sync_cost/derivations/03_a0_threshold.md",
             testable_by: "Planck Λ + SPARC a₀: ratio ≈ 2π within 10%",
             parent_slugs: &["mond-scale", "cosmological-constant"],
+        },
+
+        // ── Vortex-derived predictions ─────────────────────────────────
+        PredictionEntry {
+            slug: "hawking-from-tongue-edge",
+            name: "Hawking temperature from tongue-edge gradient",
+            description: "The Hawking temperature of an analogue black hole equals the gradient of the rotation number at the Arnold tongue boundary: T_H = (ℏ/2πk_B) · |dρ/dΩ| at the tongue edge. The thermal spectrum emerges from the critical transition between rational (locked) and irrational (drifting) rotation numbers.",
+            quantity: "T_Hawking",
+            predicted_value: "(hbar / 2 pi k_B) * |d rho / d Omega|_{tongue edge}",
+            source_derivation: "analogue_horizon → arnold_tongues → rotation_number_gradient",
+            testable_by: "Non-Hermitian lattice analogue black hole experiments (March 2026); cavity Hawking radiation measurements (July 2025)",
+            parent_slugs: &["analogue-horizon", "rotation-number", "arnold-tongues"],
+        },
+        PredictionEntry {
+            slug: "reverse-flow-scaling",
+            name: "Reverse energy flow radius scaling",
+            description: "The radius at which energy flow reverses near a charge-ℓ optical vortex scales as r_rev ∝ λ/ℓ² · (K/2)^ℓ, where the (K/2)^ℓ factor is the Arnold tongue width at topological charge ℓ. Higher-charge vortices have exponentially smaller reversal regions.",
+            quantity: "r_reverse",
+            predicted_value: "lambda / ell^2 * (K/2)^ell",
+            source_derivation: "reverse_energy_flow → arnold_tongues → tongue_width_scaling",
+            testable_by: "Near-field Poynting vector measurements of optical vortices at varying topological charge (Feb 2026)",
+            parent_slugs: &["reverse-energy-flow", "tongue-occupation", "arnold-tongues"],
+        },
+        PredictionEntry {
+            slug: "array-farey-stability",
+            name: "Vortex array stability from Farey depth",
+            description: "A lattice of N vortices is stable iff all nearest-neighbor topological charge pairs are Farey neighbors (|ℓ_i·q_j - ℓ_j·q_i| = 1). Maximum stable array size at Stern-Brocot depth D equals |F_D|, the Farey sequence length at order D.",
+            quantity: "N_max_stable",
+            predicted_value: "|F_D| = 1 + sum_{k=1}^{D} euler_totient(k)",
+            source_derivation: "vortex_array → farey_graph → stern_brocot_depth",
+            testable_by: "Coherent beam combining stability thresholds across array configurations (Dec 2025); polygonal STOV stability measurements (Dec 2025)",
+            parent_slugs: &["vortex-array", "farey-graph", "stern-brocot-tree"],
+        },
+        PredictionEntry {
+            slug: "circuit-depth-sb-depth",
+            name: "Quantum circuit depth equals Stern-Brocot depth",
+            description: "The minimum quantum circuit depth to simulate a charge-ℓ vortex interaction to precision ε scales as the Stern-Brocot depth of the rational approximant p/q closest to the target rotation number within ε. Circuit complexity IS continued-fraction complexity.",
+            quantity: "D_circuit",
+            predicted_value: "depth_SB(p/q) where |rho - p/q| < epsilon",
+            source_derivation: "quantum_vortex_simulation → stern_brocot_tree → continued_fraction",
+            testable_by: "Superconducting quantum processor vortex simulation benchmarks (Feb 2026)",
+            parent_slugs: &["quantum-vortex-simulation", "stern-brocot-address", "continued-fraction"],
         },
     ];
 
