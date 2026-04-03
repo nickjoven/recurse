@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stribeck Vortex Regime Map</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+<style>
+:root {
+  --fg: #1a1a1a;
+  --bg: #fdfdfd;
+  --accent: #8b0000;
+  --muted: #666;
+  --rule: #ddd;
+  --core: #fff0f0;
+  --ext: #f0f4ff;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font: 16px/1.6 'Georgia', serif;
+  color: var(--fg);
+  background: var(--bg);
+  max-width: 72ch;
+  margin: 3rem auto;
+  padding: 0 1.5rem;
+}
+h1 { font-size: 1.5rem; font-weight: normal; letter-spacing: 0.02em; margin-bottom: 0.25rem; }
+.byline { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
+h2 {
+  font-size: 0.85rem;
+  font-weight: normal;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 0.3rem;
+  margin: 2.5rem 0 1rem;
+}
+p { margin-bottom: 1rem; }
+.eq {
+  display: block;
+  text-align: center;
+  margin: 1.2rem 0;
+  font-size: 1.05rem;
+}
+.regime-diagram {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 0;
+  margin: 1.5rem 0;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+.regime-diagram .zone {
+  padding: 1rem 1.2rem;
+  border-radius: 4px;
+}
+.regime-diagram .core { background: var(--core); text-align: right; }
+.regime-diagram .boundary {
+  display: flex; align-items: center; justify-content: center;
+  padding: 0 0.8rem;
+  font-size: 0.8rem;
+  color: var(--accent);
+  font-style: italic;
+}
+.regime-diagram .exterior { background: var(--ext); text-align: left; }
+.zone-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); display: block; margin-bottom: 0.3rem; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 0.9rem;
+}
+th { text-align: left; font-weight: normal; color: var(--muted); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; border-bottom: 1px solid var(--rule); padding: 0.4rem 0.6rem; }
+td { padding: 0.35rem 0.6rem; border-bottom: 1px solid #eee; font-variant-numeric: tabular-nums; }
+td:first-child { font-weight: 600; }
+ol, ul { margin: 0.5rem 0 1rem 1.5rem; }
+li { margin-bottom: 0.3rem; }
+.refs { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
+.refs ol { padding-left: 1.8rem; }
+.refs li { margin-bottom: 0.15rem; }
+.context {
+  font-size: 0.85rem;
+  color: var(--muted);
+  border-left: 2px solid var(--rule);
+  padding-left: 1rem;
+  margin: 1rem 0;
+}
+.context a { color: var(--muted); }
+.prediction {
+  background: #fafafa;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 1rem 1.2rem;
+  margin: 1rem 0;
+  font-size: 0.9rem;
+}
+.prediction strong { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+img { max-width: 100%; height: auto; margin: 1rem 0; border-radius: 4px; }
+</style>
+</head>
+<body>
+
+<h1>Stribeck Vortex Regime Map</h1>
+<div class="byline">N. Joven &mdash; April 2026</div>
+
+<p>
+A vortex in a coupled medium has a velocity field $v(r)$ that varies with
+distance from the core. The Stribeck curve gives velocity-dependent coupling
+$K(v)$. Composing these yields a radial regime map $K(r)$ with a critical
+radius $r_c$ where $K(r_c) = 1$, separating an overcritical core from a
+subcritical exterior.
+</p>
+
+<div class="context">
+Condenses: <code>FRAMEWORK.md</code> &sect;1&ndash;10 &middot;
+<code>VORTEX_UNIFICATION.md</code> &sect;2B, 3, 4 &middot;
+<code>GAPS.md</code> &sect;2 &middot;
+<code>notebooks/01_stribeck_vortex_regime.ipynb</code> &middot;
+<code>harmonics/sync_cost/derivations/</code> &middot;
+<code>proslambenomenos/kuramoto_einstein_mapping.md</code>
+</div>
+
+<h2>Setup</h2>
+
+<p>The standard circle map on $S^1$:</p>
+<div class="eq">$\theta_{n+1} = \theta_n + \Omega - \dfrac{K}{2\pi}\sin(2\pi\theta_n)$</div>
+
+<p>The Stribeck curve replaces constant $K$ with velocity-dependent $K(v)$:</p>
+<div class="eq">$K(v) = K_{\rm kin} + (K_{\rm stat} - K_{\rm kin})\,e^{-v^2/v_{\rm thr}^2}$</div>
+
+<p>The azimuthal velocity of a Laguerre&ndash;Gaussian vortex of charge $\ell$:</p>
+<div class="eq">$v(r) = \dfrac{\ell\, r}{r^2 + r_{\rm core}^2}\,,\qquad r_{\rm core} = \dfrac{\lambda}{2\pi}$</div>
+
+<p>Composing: $K(r) = K\bigl(v(r)\bigr)$.</p>
+
+<h2>Regime Structure</h2>
+
+<p>
+At $v = 0$ (vortex center), $K = K_{\rm stat}$. If $K_{\rm stat} > 1$,
+the core is overcritical. As $r$ increases, $v$ increases, $K$ decreases
+through the Stribeck transition, and the exterior becomes subcritical.
+</p>
+
+<div class="regime-diagram">
+  <div class="zone core">
+    <span class="zone-label">Core &ensp; $r &lt; r_c$</span>
+    $K > 1$<br>
+    Fold active<br>
+    Reversed energy flow<br>
+    $\mu = \arccos(1/K)/\pi$
+  </div>
+  <div class="boundary">$K(r_c) = 1$</div>
+  <div class="zone exterior">
+    <span class="zone-label">Exterior &ensp; $r &gt; r_c$</span>
+    $K < 1$<br>
+    Mode-locked<br>
+    Forward energy flow<br>
+    $\mu = 0$
+  </div>
+</div>
+
+<p>The critical radius satisfies $K(v(r_c)) = 1$. The critical velocity:</p>
+<div class="eq">$v_c = v_{\rm thr}\sqrt{-\ln\!\left(\dfrac{1 - K_{\rm kin}}{K_{\rm stat} - K_{\rm kin}}\right)}$</div>
+
+<p>For $r_c \ll r_{\rm core}$:</p>
+<div class="eq">$r_c \;\sim\; \dfrac{r_{\rm core}^2\, v_c}{\ell}$</div>
+
+<p>The inner $r_c$ scales as $1/\ell$: higher charge narrows the overcritical core.</p>
+
+<h2>Fold Measure</h2>
+
+<p>The fraction of phase space in the fold region at radius $r$:</p>
+<div class="eq">$\mu(r) = \begin{cases} \dfrac{1}{\pi}\arccos\!\left(\dfrac{1}{K(r)}\right) & K(r) > 1 \\[6pt] 0 & K(r) \le 1 \end{cases}$</div>
+
+<p>Near criticality: $\mu \sim \sqrt{2(K-1)}/\pi$. At the vortex center ($K_{\rm stat} = 1.8$): $\mu = 0.3125$.</p>
+
+<h2>Computation</h2>
+
+<p>Parameters: $K_{\rm stat} = 1.8$, $K_{\rm kin} = 0.3$, $v_{\rm thr} = 1.0$,
+$\lambda = 1.0$, $r_{\rm core} = 0.1592$.</p>
+
+<table>
+<tr><th>$\ell$</th><th>$r_{c,\text{inner}} / r_{\rm core}$</th><th>$r_{c,\text{outer}} / r_{\rm core}$</th></tr>
+<tr><td>1</td><td>0.1417</td><td>7.055</td></tr>
+<tr><td>2</td><td>0.0698</td><td>14.32</td></tr>
+<tr><td>3</td><td>0.0464</td><td>&mdash;</td></tr>
+<tr><td>5</td><td>0.0278</td><td>&mdash;</td></tr>
+<tr><td>8</td><td>0.0174</td><td>&mdash;</td></tr>
+</table>
+
+<p>
+For $\ell \ge 3$, the peak velocity is large enough that $K$ stays below 1
+beyond the inner crossing. Lyapunov exponent $\lambda(r)$ at
+$\Omega = \varphi^{-1}$: positive only inside $r_c$.
+</p>
+
+<img src="notebooks/stribeck_vortex_regime.png" alt="Four-panel regime map">
+<img src="notebooks/lyapunov_radial.png" alt="Radial Lyapunov profile">
+
+<h2>Structural Predictions</h2>
+
+<p>These hold for any Stribeck parameters with $K_{\rm stat} > 1$:</p>
+<ol>
+  <li>The overcritical region is centered on the vortex core ($v = 0$, $K$ maximal).</li>
+  <li>The extent of reversed flow shrinks monotonically with $\ell$.</li>
+  <li>The fold measure peaks at the center and decays to zero at $r_c$.</li>
+</ol>
+
+<h2>Open Question</h2>
+
+<div class="prediction">
+<strong>Computable</strong><br>
+For Pryamikov's 2D photonic crystal (arXiv:2601.21704):
+<ol>
+  <li>Extract $(K_{\rm stat},\, K_{\rm kin},\, v_{\rm thr})$ from the electromagnetic coupling structure.</li>
+  <li>Compute $v(r)$ around each Poynting-vector vortex from full-wave simulation.</li>
+  <li>Evaluate $K(r) = K(v(r))$ and find $r_c$ where $K(r_c) = 1$.</li>
+  <li>Compare $r_c$ to the observed boundary of reverse Poynting vector flow.</li>
+</ol>
+For the gravity sector, the analogous $K$-derivation is complete:
+$K(x,x') = G_\gamma(x,x')$ via the Kuramoto&ndash;Einstein dictionary.
+</div>
+
+<h2>References</h2>
+
+<div class="refs">
+<ol>
+<li>Pryamikov. Reverse Energy Flows in 2D Photonic Crystals. arXiv:2601.21704 (2026).</li>
+<li>Kotlyar et al. 2D optical vortices and reverse energy flow. Opt. Lett. 51(4) (2026).</li>
+<li>Bucher et al. Superluminal Correlations in Phase Singularities. Nature (2026). arXiv:2509.17675.</li>
+<li>Fathi et al. Power-Scalable High-Order Optical Vortices. arXiv:2512.19815 (2025).</li>
+<li>Wang et al. Simulating Fluid Vortex Interactions on a Quantum Processor. Nat. Commun. (2026). arXiv:2506.04023.</li>
+<li>Ghezzi &amp; Custodio. Topological Phase Transitions in Superfluids. arXiv:2603.13544 (2026).</li>
+<li>Munoz-Arboleda et al. Analogue Black Holes in Non-Hermitian Tight-Binding. Phys. Rev. B 113 (2026). arXiv:2507.03826.</li>
+<li>Garcia Martin-Caro et al. Analogue Hawking Radiation in Cavities. arXiv:2507.13894 (2025).</li>
+<li>Fan et al. Polygonal Spatiotemporal Optical Vortices. arXiv:2512.16308 (2025).</li>
+<li>Das &amp; Ciappina. Optical Vortices: Linear and Nonlinear Optics. arXiv:2510.27200 (2025).</li>
+<li>Arnold. Geometrical Methods in ODE (1983), ch. 11.</li>
+<li>Jensen, Bak &amp; Bohr. Phys. Rev. A 30 (1984) 1960.</li>
+<li>Shenker. Physica D 5 (1982) 405.</li>
+<li>Feigenbaum, Kadanoff &amp; Shenker. Physica D 5 (1982) 370.</li>
+<li>Stribeck. Z. Verein. Deutsch. Ing. 46 (1902).</li>
+<li>Lanford. Bull. Amer. Math. Soc. 6 (1982) 427.</li>
+</ol>
+</div>
+
+</body>
+</html>
