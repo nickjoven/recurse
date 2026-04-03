@@ -145,7 +145,7 @@ and the irrationals (infinite paths) correspond to quasiperiodic orbits.
 Planetary orbits (approximately). Uncoupled oscillators. The Stern-Brocot
 tree is a catalog of all possible periods and near-periods.
 
-But nothing interesting has happened yet, because there is no coupling.
+At this stage there is no coupling, so the tree classifies orbits without affecting them.
 
 Reference: Katok & Hasselblatt, *Introduction to the Modern Theory of
 Dynamical Systems* (1995), §4.1.
@@ -188,10 +188,9 @@ This is the setting for:
 - Two coupled metronomes on a shared platform
 - A charge-density wave driven by an electric field
 
-The circle map is not a metaphor for these systems. It is the **normal form**
-for any periodically forced oscillator near a resonance. Every system listed
-above reduces to the circle map (or its generalization) in the appropriate
-limit.
+The circle map is the normal form for any periodically forced oscillator
+near a resonance. Every system listed above reduces to the circle map (or
+its generalization) in the appropriate limit.
 
 Reference: Arnold, *Geometrical Methods in the Theory of Ordinary
 Differential Equations* (1983), §11; Jensen, Bak & Bohr, "Transition to
@@ -221,7 +220,7 @@ No frequency-locking. The Stern-Brocot tree classifies orbits but doesn't
 
 ## 6. 0 < K < 1: Mode-Locking (The Subcritical Regime)
 
-Turn on the coupling. Something new happens.
+When coupling is introduced, the dynamics change qualitatively.
 
 For each rational p/q in the Stern-Brocot tree, there is now a **range**
 of bare frequencies Ω that all produce the *same* rotation number ρ = p/q.
@@ -680,10 +679,10 @@ Lovelock's theorem (Derivation 13, Proof Chain A in
 `harmonics/sync_cost/derivations/`). The synchronization cost functional
 (`harmonics/sync_cost/FRAMEWORK.md`) is the variational principle.
 
-This means K is **not a free parameter** in the gravity sector — it is
-determined by the spatial geometry through the Green's function. The
-grammar's predictions for the gravity sector are unconditional once the
-Kuramoto-Einstein identification is granted.
+If this identification holds, K is not a free parameter in the gravity
+sector but is determined by the spatial geometry through the Green's
+function. The grammar's outputs for the gravity sector then follow
+without additional free parameters.
 
 ### The DAG structure
 
@@ -703,9 +702,9 @@ L3:  Instantiations                                  [physics]
         (analogue-horizon, reverse-energy-flow,
          vortex-array, quantum-vortex-simulation)
       │
-L4:  Predictions                                     [testable]
-     ├─ Gravity: unconditional (Ω_Λ, a₀, n_s, ...)
-     └─ Vortex: conditional on K-derivation
+L4:  Open questions                                   [testable]
+     ├─ Gravity sector (Ω_Λ, a₀, n_s, ...)
+     └─ Vortex sector: conditional on K-derivation
 ```
 
 For the gravity sector, the derivation chain from L0 to L4 is complete

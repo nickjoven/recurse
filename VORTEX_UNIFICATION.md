@@ -1,16 +1,11 @@
 # Vortex Unification: Phase Singularities as the Common Substrate
 
-> "Now I am become Death, the destroyer of worlds."
->
-> The phase singularity destroys amplitude to create circulation.
-> Every vortex core is an annihilation that generates topology.
-
 ## Thesis
 
-The four research clusters below all study the **phase singularity** — a
-topological defect where amplitude vanishes and phase is undefined. This is the
-"hole" in every optical vortex, the "horizon" in every analogue black hole, and
-the node around which circulation is quantized in every superfluid.
+The four research clusters below all study the phase singularity — a
+topological defect where amplitude vanishes and phase is undefined. Such
+singularities appear in optical vortices, analogue black holes, and
+superfluids, in each case as the locus where circulation is quantized.
 
 The synchronization cost framework (harmonics/sync_cost/) provides the
 algebraic grammar that classifies these singularities: the circle map,
@@ -120,12 +115,12 @@ candidate exponent for the velocity divergence before annihilation.
    arXiv: [2510.27200](https://arxiv.org/abs/2510.27200) (Oct 2025).
    - Comprehensive review of OAM beams across linear and nonlinear regimes.
 
-**Grammar connection:** At K > 1, the grammar predicts multistability
+**Grammar connection:** At K > 1, the grammar implies multistability
 (coexisting OAM states from tongue overlap) and tongue-internal cascades.
 Computation shows SB-adjacent tongues overlap first (K ~ 1.5), with all
-observed overlaps at SB-distance 1 up to K ~ 4. The ℓ-to-rotation-number
+observed overlaps at SB-distance 1 up to K ~ 4. The l-to-rotation-number
 mapping for OAM states has not been established; for distant charges
-(e.g., ℓ = 2 ↔ ℓ = 20), the 1D circle map is insufficient and
+(e.g., l = 2 and l = 20), the 1D circle map is insufficient and
 higher-dimensional maps may be needed.
 
 ### 2D. Quantum Simulations
@@ -143,54 +138,57 @@ higher-dimensional maps may be needed.
 Stern-Brocot depth of the target rotation number (window width ~ 0.458^depth
 at K = 1.5, confirmed by computation). The cost is in parameter resolution,
 not dynamical time-stepping. Whether quantum phase estimation achieves
-polynomial overhead — the quantum advantage claim — remains to be computed.
-K(Γ, r, N) for interacting point vortices has not been derived.
+polynomial overhead remains to be computed. K(Gamma, r, N) for interacting
+point vortices has not been derived.
 
 ---
 
-## 3. Assessment
+## 3. Status Classification
 
-### Established by the papers
+### Observed
 - Phase singularities are universal topological defects (all 10 papers)
 - Vortex-antivortex pair creation near horizons via BKT mechanism (Paper 2)
 - Poynting-vector vortices create reverse energy flows and determine band gaps (Paper 5)
-- Gigantic wave vectors near intensity zeros with reverse energy flow (Paper 4)
+- Large wave vectors near intensity zeros with reverse energy flow (Paper 4)
 - Superluminal singularity velocities before annihilation (Paper 6, Nature)
 - Combining efficiency decreases with topological charge (Paper 7)
 - Quantum processors simulate multi-vortex Navier-Stokes dynamics (Paper 10)
 
-### Derived within the framework (gravity sector)
+### Derived (gravity sector)
 - Horizon = r = 0 = N = 0 (coherence = lapse, from Kuramoto-Einstein dictionary)
-- K(x,x') = G_γ(x,x') — coupling is the spatial Green's function, not a free parameter
-- Synchronization cost functional as variational principle → Einstein equations
+- K(x,x') = G_gamma(x,x') — coupling is the spatial Green's function, not a free parameter
+- Synchronization cost functional as variational principle leading to Einstein equations
   at K = 1 in the continuum limit (Derivation 13, Proof Chain A)
 
-### Open questions (K-mapping not derived for vortex systems)
+### Open (K-mapping not derived for vortex systems)
 - Hawking temperature from tongue-edge gradient: requires lattice-to-circle-map
   reduction for Paper 1's non-Hermitian system
-- Quantum circuit depth ∝ Stern-Brocot depth: requires KAM bridge theorem for
+- Quantum circuit depth proportional to Stern-Brocot depth: requires KAM bridge theorem for
   point-vortex Hamiltonians
-- Photonic band gap width ∝ √(K-1): requires K ↔ index contrast derivation
-- OAM coexistence from tongue overlap: requires ℓ-to-rotation-number mapping;
+- Photonic band gap width proportional to sqrt(K-1): requires K-to-index-contrast derivation
+- OAM coexistence from tongue overlap: requires l-to-rotation-number mapping;
   1D circle map insufficient for distant charges
 
 ---
 
-## 4. Open Predictions
+## 4. Computable Open Questions
 
-### P1: Hawking Temperature from Tongue-Edge Gradient
-**T_H = (ℏ/2πk_B) · |dρ/dΩ|_{tongue edge}**
+### Q1: Hawking Temperature from Tongue-Edge Gradient
 
-Requires intermediate derivation: mapping Paper 1's non-Hermitian lattice
-Hamiltonian to a circle map via Floquet analysis. In the gravity sector,
-the Kuramoto-Einstein dictionary already provides the horizon identification;
+Open question: does Paper 1's non-Hermitian lattice Hamiltonian reduce to a
+circle map under Floquet analysis? If so, the tongue-edge gradient yields
+T_H = (hbar/2pi k_B) |d rho/d Omega| at the tongue edge, which can be
+compared to the Parikh-Wilczek tunneling result. In the gravity sector, the
+Kuramoto-Einstein dictionary already provides the horizon identification;
 the question is whether Paper 1's specific system admits the same mapping.
 
-### P2: Quantum Circuit Depth Scales with Stern-Brocot Depth
-**Minimum circuit depth ∝ depth_SB(p/q)**
+### Q2: Quantum Circuit Depth and Stern-Brocot Depth
 
-Classical cost scaling confirmed (width ~ 0.458^depth). Requires proving
-rotation-number structure in point-vortex Hamiltonian spectrum (KAM theory).
+Open question: does the point-vortex Hamiltonian spectrum exhibit
+rotation-number structure (as KAM theory would suggest)? If so, minimum
+circuit depth should scale with depth_SB(p/q). Classical cost scaling has
+been confirmed computationally (width ~ 0.458^depth); the quantum half
+(polynomial overhead via phase estimation) remains to be computed.
 
 ---
 
