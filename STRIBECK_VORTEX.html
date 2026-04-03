@@ -210,20 +210,41 @@ $\Omega = \varphi^{-1}$: positive only inside $r_c$.
   <li>The fold measure peaks at the center and decays to zero at $r_c$.</li>
 </ol>
 
-<h2>Open Question</h2>
+<h2>Open Question &mdash; Addressed</h2>
 
 <div class="prediction">
-<strong>Computable</strong><br>
-For Pryamikov's 2D photonic crystal (arXiv:2601.21704):
+<strong>Computed</strong><br>
+For Pryamikov's 2D photonic crystal (arXiv:2601.21704), the K-mapping
+is derived in
+<a href="notebooks/02_photonic_crystal_stribeck.py">02_photonic_crystal_stribeck.py</a>:
 <ol>
-  <li>Extract $(K_{\rm stat},\, K_{\rm kin},\, v_{\rm thr})$ from the electromagnetic coupling structure.</li>
-  <li>Compute $v(r)$ around each Poynting-vector vortex from full-wave simulation.</li>
-  <li>Evaluate $K(r) = K(v(r))$ and find $r_c$ where $K(r_c) = 1$.</li>
-  <li>Compare $r_c$ to the observed boundary of reverse Poynting vector flow.</li>
+  <li>$K_{\rm stat} = K_{\rm 2D}(\Delta n, f)
+      = 1 + 2(\Delta n)^2\,(1 + f\,\pi/\!\sqrt{3})$
+      &mdash; extends the 1D Bragg result by the hexagonal geometric factor.</li>
+  <li>$K_{\rm kin} = f\,(\Delta n)^2$
+      &mdash; forward-scattering limit (subcritical).</li>
+  <li>$v_{\rm thr} = 1/(n_{\rm eff}\, Q)$
+      &mdash; coherent response bandwidth of the crystal mode.</li>
+  <li>$v(r)$ for Poynting-vector vortices includes a Bessel lattice
+      modulation: $v(r) = v_{\rm LG}(r)\,[1 - \alpha\, J_0(G_1 r)]$.</li>
 </ol>
+At $\Delta n = 0.5$, $f = 0.15$, $Q = 50$:
+$K_{\rm stat} = 1.636$, fold measure at core $\mu(0) = 0.291$
+(29.1% reversed energy flow).
+
+<br><br>
+<strong>Remaining</strong><br>
+Extract $\Delta n$, $f$, $Q$ from Pryamikov's specific geometry
+(Figs.&nbsp;3&ndash;5 of arXiv:2601.21704) and compare the predicted $r_c$
+to the observed spatial extent of reversed Poynting vector flow.
+
+<br><br>
 For the gravity sector, the analogous $K$-derivation is complete:
 $K(x,x') = G_\gamma(x,x')$ via the Kuramoto&ndash;Einstein dictionary.
 </div>
+
+<img src="https://raw.githubusercontent.com/nickjoven/recurse/main/notebooks/photonic_crystal_regime.png" alt="Photonic crystal regime map">
+<img src="https://raw.githubusercontent.com/nickjoven/recurse/main/notebooks/photonic_crystal_sensitivity.png" alt="Parameter sensitivity">
 
 <h2>References</h2>
 
