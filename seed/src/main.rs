@@ -456,47 +456,50 @@ fn main() {
             parent_slugs: &["arnold-tongues", "stern-brocot-address", "devils-staircase"],
         },
 
-        // ── Vortex bridge nodes ────────────────────────────────────────
-        // These nodes connect the abstract synchronization ontology to
-        // concrete vortex physics: the phase singularity is a fixed point
-        // of the phase flow, classified by rotation number (topological
-        // charge), and organized by Arnold tongue / Farey structure.
+        // ── Candidate physical instantiations ──────────────────────────
+        // These nodes are CANDIDATE systems that may exhibit circle-map
+        // dynamics. The framework classifies what behaviors are possible
+        // once K is known; it does NOT derive K for each system. The
+        // K-mapping is the open physics problem for each instantiation.
+        //
+        // Pattern: [grounded observation] + [structural home in grammar]
+        //        + [OPEN: what determines K in this system?]
 
         OntologyEntry {
             level: 2,
             slug: "analogue-horizon",
-            name: "Analogue horizon",
-            description: "INTERPRETATION: proposes that the boundary of an Arnold tongue can be reinterpreted as an event horizon — mode-locked (subsonic) inside, drifting (supersonic) outside. At K > 1, the horizon acquires internal structure: the tongue-internal cascade means the 'inside' of the horizon is not uniformly locked but contains its own route to chaos. Grounded: analogue BH systems (Munoz-Arboleda et al. 2507.03826) create horizons at interfaces between distinct propagation regimes. Interpretive: the tongue-boundary = horizon identification is our proposal. The Lyapunov exponent (not the rotation number) is the correct diagnostic for the horizon's character at K > 1.",
-            symbol: Some("λ < 0 → λ > 0"),
-            tags: &["algebra", "horizon", "analogue", "hawking", "overcritical"],
-            parent_slugs: &["multistability", "synchronization-cost", "lyapunov-exponent"],
+            name: "Analogue horizon [K-mapping: OPEN]",
+            description: "OBSERVATION: analogue BH systems create horizons at interfaces between distinct propagation regimes (Munoz-Arboleda et al. 2507.03826 — non-Hermitian lattice mapped to Schwarzschild in Painlevé-Gullstrand coords). STRUCTURAL HOME: the grammar classifies horizons as boundaries between λ < 0 (locked/subsonic) and λ > 0 (chaotic/supersonic) regions. At K > 1, the horizon has internal structure (tongue-internal cascade). OPEN PROBLEM: what determines K in the non-Hermitian lattice? Candidates: hopping asymmetry, gain/loss ratio, interface sharpness. Deriving K(lattice params) would make the classification testable.",
+            symbol: None,
+            tags: &["instantiation", "horizon", "analogue", "k-mapping-open"],
+            parent_slugs: &["multistability", "lyapunov-exponent"],
         },
         OntologyEntry {
             level: 2,
             slug: "reverse-energy-flow",
-            name: "Reverse energy flow",
-            description: "Grounded: near a phase singularity (intensity zero), the Poynting vector locally reverses direction — demonstrated by Kotlyar et al. (Opt. Lett. 2026) and Pryamikov (2601.21704). Gigantic wave vectors of both signs appear near the zero. At K > 1, the reversal corresponds to the fold region of the circle map where the derivative changes sign — the interval where F is decreasing IS the region of reversed flow. This is more precise than the earlier cost-functional saddle interpretation: the fold geometry directly produces the reversal.",
+            name: "Reverse energy flow [K-mapping: OPEN]",
+            description: "OBSERVATION: near phase singularities, the Poynting vector reverses — demonstrated by Kotlyar et al. (Opt. Lett. 2026) and Pryamikov (2601.21704). Fold measure μ = arccos(1/K)/π scales as √(K-1), not (K-1). STRUCTURAL HOME: the fold region {θ: F'(θ)<0} of the overcritical circle map IS the region of reversed flow. OPEN PROBLEM: what determines K in a photonic crystal or optical vortex? For photonic crystals, K likely depends on refractive index contrast, but the mapping K(Δn) is not derived. Gap 3 showed the fold measure ∝ √(K-1) while photonic band gaps ∝ Δn, implying K-1 ∝ (Δn)² if the identification holds — but this needs derivation, not assumption.",
             symbol: Some("F'(θ) < 0"),
-            tags: &["algebra", "energy-flow", "singularity", "fold", "overcritical"],
-            parent_slugs: &["fixed-point", "tongue-internal-cascade", "lyapunov-exponent"],
+            tags: &["instantiation", "energy-flow", "singularity", "k-mapping-open"],
+            parent_slugs: &["tongue-internal-cascade", "lyapunov-exponent"],
         },
         OntologyEntry {
             level: 3,
             slug: "vortex-array",
-            name: "Vortex array",
-            description: "Grounded: coherent beam combining produces high-power charge-ℓ vortices (Fathi et al. 2512.19815, 100W/100kW at ℓ=1,5,8). Polygonal STOV wavepackets with prescribed singularity arrangements exist (Fan et al. 2512.16308). At K > 1, vortex arrays operate in the multistable regime where multiple tongue-locked states coexist — the array can support multiple stable configurations at the same parameters. The combining efficiency drop with ℓ is NOT explained by tongue-width scaling (KILLED: K/2 > 1 required, formula inapplicable). The correct framework is multistability and tongue-internal cascades at overcritical coupling.",
+            name: "Vortex array [K-mapping: OPEN]",
+            description: "OBSERVATION: coherent beam combining produces high-power charge-ℓ vortices with efficiency decreasing with ℓ (Fathi et al. 2512.19815: 95.0%, 93.9%, 91.2% at ℓ=1,5,8). Polygonal STOVs with prescribed geometries exist (Fan et al. 2512.16308). STRUCTURAL HOME: at K > 1, the grammar predicts multistability (coexisting OAM states) and tongue-internal cascades. KILLED: the tongue-width formula (K/2)^ℓ does not apply (K/2 > 1 required; phase-error model fits better). OPEN PROBLEM: what determines K in a coherent beam array? Phase noise coupling between elements is the natural candidate; deriving K(phase_noise, N_beams, ℓ) would test whether the grammar applies.",
             symbol: None,
-            tags: &["topology", "array", "lattice", "beam-combining", "overcritical"],
-            parent_slugs: &["multistability", "self-similar-descent", "tongue-occupation"],
+            tags: &["instantiation", "array", "beam-combining", "k-mapping-open"],
+            parent_slugs: &["multistability", "self-similar-descent"],
         },
         OntologyEntry {
             level: 3,
             slug: "quantum-vortex-simulation",
-            name: "Quantum vortex simulation",
-            description: "Grounded: Wang et al. (2506.04023) reformulate Navier-Stokes as a quantum Hamiltonian and simulate multi-vortex interactions on 8 qubits (99.97%/99.76% fidelity). Multi-vortex interactions are inherently K > 1 systems — multiple vortices mutually coupled produce the fold, multistability, and chaotic trajectories characteristic of the overcritical regime. The quantum simulation's success means it handles the K > 1 dynamics that the K < 1 framework cannot describe. The circuit-depth ∝ Stern-Brocot-depth prediction (BLOCKED) would need to operate through the self-similar descent: periodic windows within chaotic vortex dynamics organized by the SB hierarchy.",
+            name: "Quantum vortex simulation [K-mapping: OPEN]",
+            description: "OBSERVATION: Wang et al. (2506.04023) simulate multi-vortex Navier-Stokes dynamics on 8 qubits (99.97%/99.76% fidelity). STRUCTURAL HOME: multi-vortex interactions produce the mutual coupling, multistability, and chaos characteristic of K > 1 dynamics. The grammar predicts that simulation difficulty should track the self-similar descent (periodic windows within chaos organized by SB depth). OPEN PROBLEM: what determines K for N interacting point vortices? The inter-vortex Hamiltonian H = -(Γ²/4π)Σlog|rᵢ-rⱼ| gives coupling that grows with 1/r², but mapping this to an effective K(Γ, r, N) for the circle-map grammar is not done.",
             symbol: None,
-            tags: &["topology", "quantum", "simulation", "verification", "overcritical"],
-            parent_slugs: &["conservation-as-computability", "self-similar-descent", "lyapunov-exponent"],
+            tags: &["instantiation", "quantum", "simulation", "k-mapping-open"],
+            parent_slugs: &["conservation-as-computability", "self-similar-descent"],
         },
     ];
 

@@ -617,6 +617,104 @@ References:
 - Lanford, "A computer-assisted proof of the Feigenbaum conjectures",
   Bull. Amer. Math. Soc. **6** (1982) 427–434.
   [Rigorous proof that the Feigenbaum cascade is universal.]
+
+---
+
+## 10. The Framework Is a Grammar, Not a Prediction Engine
+
+### The error we made and corrected
+
+This framework was initially used to **predict** specific physical
+quantities: Hawking temperatures, combining efficiencies, BKT critical
+temperatures, band gap widths. Every such prediction was killed by
+computation:
+
+| Prediction | How it died |
+|---|---|
+| η(ℓ) = 1 - c·(K/2)^ℓ | K/2 > 1 required; wrong regime; phase-error fits better |
+| T_BKT/T_H = (δ-1)/δ | BKT ≠ Feigenbaum; different universality classes |
+| Band gap ∝ (K-1) | Fold measure ∝ √(K-1); and K ↔ Δn mapping unknown |
+
+The pattern: the circle map mathematics was correct in every case. The
+physics in each paper was correct. **The failure was always at the bridge**
+— the mapping from physical parameters to the circle map's K. That mapping
+was assumed, never derived, and it is where all the actual physics lives.
+
+### What the framework actually does
+
+The circle map is the **normal form** for periodically forced oscillators
+near resonance (Arnold 1983). The Stern-Brocot tree, Arnold tongues,
+Feigenbaum cascades, Lyapunov exponents, tongue overlap, and self-similar
+descent are the **vocabulary of possible behaviors** for such systems.
+
+The framework is a **grammar**:
+
+- Given K = 0: it tells you the system has periodic or quasiperiodic orbits,
+  classified by the Stern-Brocot tree.
+- Given 0 < K < 1: it tells you which rotation numbers lock (tongues),
+  how wide the locking regions are ((K/2)^q), and which irrationals resist
+  longest (noble numbers).
+- Given K = 1: it tells you the staircase is complete, the scaling is
+  universal, and the golden ratio governs the critical point.
+- Given K > 1: it tells you tongues overlap (multistability), each tongue
+  develops internal cascades (Feigenbaum), chaos fills the gaps, and periodic
+  windows within chaos recapitulate the Stern-Brocot hierarchy (self-similar
+  descent).
+
+What the grammar does **not** do: it does not tell you the value of K for
+a given physical system. That is a **system-specific derivation** that
+requires understanding the actual physics:
+
+| System | What determines K |
+|---|---|
+| Josephson junction | Ratio of drive current to critical current |
+| Cardiac pacemaker | Coupling strength between cells |
+| Non-Hermitian lattice | Hopping asymmetry, gain/loss ratio |
+| Photonic crystal | Refractive index contrast, geometry |
+| Optical vortex array | Phase noise, beam count, charge |
+| Point vortex system | Inter-vortex Hamiltonian, separation |
+
+Each of these is a one-system physics problem. The framework organizes
+what you find after solving it; it cannot substitute for solving it.
+
+### How to use the framework correctly
+
+**Direction that works: physics → grammar.**
+Take a physical system. Derive its effective K from first principles.
+Locate K in the regime map (K < 1, K = 1, K > 1). Read off the possible
+behaviors from the grammar. Compare to observation.
+
+**Direction that fails: grammar → physics.**
+Start from the grammar. Pick a behavior (tongue width, cascade ratio,
+fold measure). Assume it maps to a specific physical quantity without
+deriving K. Make a numerical prediction. This produces curve-fitting
+that looks like physics but isn't.
+
+### The DAG structure this implies
+
+```
+L0:  Integers, mediant, fixed point, parabola     [pure math]
+      │
+L1:  SB tree, circle map, tongues, staircase,     [grammar]
+     Feigenbaum, Lyapunov, period-doubling
+      │
+L2:  Regime classification (K<1, K=1, K>1),       [grammar]
+     multistability, tongue-internal cascade,
+     self-similar descent, fold measure
+      │
+L3:  Candidate instantiations                     [physics]
+     Each tagged [K-mapping: OPEN]
+     Each with: observation + structural home
+              + open problem (what determines K)
+      │
+L4:  Conditional predictions                      [testable]
+     Form: IF K maps as X, THEN observable Y
+     Each killed or confirmed by deriving the K mapping
+```
+
+The hard work — and the publishable work — is at L3: deriving K for
+each system. The grammar (L0-L2) is standard mathematics. The
+predictions (L4) are consequences. The K-mapping is the physics.
 number-theoretic structure (Stern-Brocot tree, continued fractions, Farey
 graph) persists in the organization of the remaining mode-locked islands
 amid chaos.
