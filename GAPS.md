@@ -130,39 +130,49 @@ local phase-space structure.
 
 ---
 
-## Gap 4: BKT Critical Temperature on Curved Spacetime
+## ~~Gap 4: BKT Critical Temperature on Curved Spacetime~~ [RETRACTED]
 
 **What the literature admits:**
 
 Ghezzi & Custodio (2603.13544) find vortex-antivortex pair proliferation
 near black hole horizons using the 2D XY model on Schwarzschild-de Sitter
 spacetime. They identify the phenomenon but do not derive the **critical
-temperature** T_BKT as a function of the black hole parameters. More
-broadly, a 2025 review notes that "the impact of curved spacetime on the
-topological properties of [low-dimensional quantum] systems remains
-unexplored."
+temperature** T_BKT as a function of the black hole parameters.
 
-**What K > 1 provides:**
+**Original prediction — FALSIFIED BY COMPUTATION:**
 
-The BKT transition in the circle-map framework corresponds to the
-Feigenbaum accumulation point within the relevant tongue. The critical
-temperature maps to the coupling strength at which the tongue-internal
-cascade completes:
+The original claim was T_BKT / T_Hawking = (δ-1)/δ ≈ 0.786. This is wrong
+on two independent grounds:
+
+1. **(δ-1)/δ is not the correct cascade ratio.** The actual logistic map
+   ratio (r_∞ - r_1)/(r_max - r_1) = 0.570, not 0.786. The formula
+   conflated the geometric series ratio with the parameter-space ratio.
+
+2. **BKT and Feigenbaum are different universality classes.** BKT is a
+   topological transition (vortex-antivortex unbinding), governed by the
+   Kosterlitz RG flow. Feigenbaum is a metric transition (period-doubling
+   → chaos). They are not the same transition and one does not predict
+   the other. The known BKT temperature T_BKT/J ≈ 0.893 for flat 2D XY
+   is derived from the Kosterlitz flow equations, not from any cascade.
+
+**What the cascade DOES predict (revised, narrower claim):**
+
+For a **driven** XY model near a black hole horizon (not the equilibrium
+model Ghezzi & Custodio study), the topologically ordered phase (T < T_BKT,
+bound vortex pairs) can undergo period-doubling under external driving.
+The chaos onset within the ordered phase would occur at:
 
 ```
-    T_BKT = T_tongue × (1 + 1/δ + 1/δ² + ...)⁻¹ = T_tongue × (δ-1)/δ
+    T_chaos / T_BKT ≈ (r_∞ - r_1) / (r_max - r_1) ≈ 0.570
 ```
 
-where T_tongue is the temperature at the tongue boundary (the analogue
-Hawking temperature) and δ = 4.6692... is the Feigenbaum constant. The
-ratio T_BKT / T_Hawking = (δ-1)/δ ≈ 0.7858 is a **universal prediction**
-— it depends only on the Feigenbaum constant, not on the black hole
-parameters.
+This is testable but requires a different system than the one in the paper.
 
-**Testable prediction:** For Ghezzi & Custodio's Schwarzschild-de Sitter
-model, compute T_BKT numerically from the XY model. The ratio T_BKT /
-T_Hawking should be approximately (δ-1)/δ ≈ 0.786 if the tongue-internal
-cascade governs the transition. This is a sharp, falsifiable number.
+**For the actual Ghezzi & Custodio system:** The BKT transition on curved
+spacetime is governed by the position-dependent effective coupling
+J_eff(r) = J · √g_rr(r). The critical temperature is where
+T_local(r) = T_BKT(J_eff(r)). This is a well-posed GR + XY calculation,
+not a circle-map question. The K > 1 framework has nothing to add here.
 
 ---
 
@@ -242,11 +252,12 @@ tongue-overlap model predicts that:
 | Trans-Planckian cutoff | 2507.13894, 2204.06583 | Feigenbaum cascade = natural UV hierarchy | Yes: gray-body oscillation periods → 1/δ |
 | Velocity divergence rate | 2509.17675 (Nature) | Lyapunov critical exponent at tongue boundary | Yes: measure β in v_s ~ Δt^{-β}, compare to γ |
 | Band gap criterion | 2601.21704 | Fold width F'(θ)<0 ∝ (K-1) | Yes: band gap width vs. index contrast |
-| BKT critical temperature | 2603.13544 | T_BKT/T_Hawking = (δ-1)/δ ≈ 0.786 | Yes: compute T_BKT numerically, check ratio |
+| ~~BKT critical temperature~~ | ~~2603.13544~~ | ~~RETRACTED: BKT ≠ Feigenbaum (different universality class)~~ | ~~No~~ |
 | Quantum advantage criterion | 2303.16550, 2506.04023 | SB depth of rotation number | Yes: classical cost vs. quantum cost at different ρ |
 | OAM switching thresholds | fiber laser experiments | Tongue overlap + basin boundaries | Yes: intermediate ℓ transients during switching |
 
-All six resolutions produce falsifiable predictions. Four of them
-(gaps 1, 2, 4, 6) yield specific numerical targets. Two (gaps 3, 5)
-yield scaling laws. None require new mathematics beyond the standard
-K > 1 circle-map phenomenology posed in FRAMEWORK.md §9.
+Five of six resolutions survive. Gap 4 (BKT temperature) was retracted
+after computation showed BKT and Feigenbaum are different universality
+classes. Three surviving gaps (1, 2, 6) yield specific numerical targets.
+Two (3, 5) yield scaling laws. None require new mathematics beyond the
+standard K > 1 circle-map phenomenology posed in FRAMEWORK.md §9.
