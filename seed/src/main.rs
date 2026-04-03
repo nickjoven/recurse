@@ -574,12 +574,12 @@ fn main() {
         },
         PredictionEntry {
             slug: "combining-efficiency-scaling",
-            name: "Combining efficiency follows tongue-width decay [GAP: dimensional mismatch]",
-            description: "CONFOUNDED. Hypothesizes η(ℓ) = 1 - c·(K/2)^ℓ. Fathi et al. (2512.19815) measured η = 95.0%, 93.9%, 91.2% at ℓ = 1, 5, 8. The trend (decreasing with ℓ) is real. HOWEVER: Arnold tongue width W(p/q,K) ∝ (K/2)^q measures the fraction of parameter space that mode-locks — a fundamentally different quantity from beam combining efficiency. The efficiency loss is more naturally explained by phase-error accumulation: a charge-ℓ beam requires an ℓ×2π phase ramp, so alignment errors scale with ℓ. A simple η ∝ exp(-σ²ℓ²) fits equally well. Three data points at ℓ = 1, 5, 8 cannot distinguish (K/2)^ℓ from σ²ℓ² or other monotone decreasing functions. The mapping from 'tongue width' to 'combining efficiency loss' lacks physical justification.",
+            name: "Combining efficiency follows tongue-width decay [KILLED]",
+            description: "DEAD. Computation shows: (1) Phase-error model η=a·exp(-σ²ℓ²) fits 5x better (SSR 8.79e-6 vs 4.18e-5). (2) Fit requires K/2=1.09, outside the weak-coupling regime where (K/2)^q is derived — the formula is self-contradictory at these parameter values. (3) All 2-param models fit 3 points; they only diverge at ℓ≥10 where no data exists. Original data: Fathi et al. (2512.19815) η=95.0%, 93.9%, 91.2% at ℓ=1,5,8. The efficiency drop is real but is explained by mundane phase-error accumulation (ℓ×2π ramp sensitivity), not tongue-width scaling.",
             quantity: "eta(ell)",
-            predicted_value: "1 - c * (K/2)^ell (CONFOUNDED: see description)",
-            source_derivation: "vortex_array → arnold_tongues (GAP: tongue width ≠ combining efficiency)",
-            testable_by: "Would require ≥6 data points across ℓ = 1..10 to distinguish from exp(-σ²ℓ²); also must control for engineering confounds (alignment, aberration)",
+            predicted_value: "KILLED — K/2 > 1 makes tongue-width formula inapplicable",
+            source_derivation: "FALSIFIED by computation: phase-error model fits better and tongue model requires unphysical K",
+            testable_by: "N/A — prediction withdrawn",
             parent_slugs: &["vortex-array", "tongue-occupation", "arnold-tongues"],
         },
         PredictionEntry {

@@ -254,19 +254,37 @@ to a circle map under some parameter mapping (plausible via Floquet analysis
 of the non-Hermitian system, but this is a paper-sized problem). Without the
 reduction, this is a formula without a bridge.
 
-### P2: Combining Efficiency as Tongue-Width Scaling ~~[DEMOTED]~~
-**η(ℓ) ∝ 1 - c·(K/2)^ℓ**
+### ~~P2: Combining Efficiency as Tongue-Width Scaling~~ [KILLED]
+**~~η(ℓ) ∝ 1 - c·(K/2)^ℓ~~**
 
-Status: **CONFOUNDED — dimensional mismatch.** Arnold tongue width W(p/q,K)
-∝ (K/2)^q measures the *fraction of parameter space* that mode-locks at
-rotation number p/q. Combining efficiency measures how well beams interfere.
-These are different quantities. The efficiency drop (95.0% → 93.9% → 91.2%
-at ℓ = 1, 5, 8) is more naturally explained by phase-error accumulation: a
-charge-ℓ beam requires an ℓ×2π phase ramp, so alignment errors scale with ℓ.
-A simple η ∝ exp(-σ²ℓ²) fits the trend equally well. Three data points cannot
-distinguish our (K/2)^ℓ from σ²ℓ² or any other monotone decreasing function.
-The mapping from "tongue width" to "combining efficiency loss" lacks physical
-justification. **Not a valid prediction in its current form.**
+Status: **DEAD — computation falsifies.** Three independent failures:
+
+1. **Phase-error model fits 5x better.** η = a·exp(-σ²ℓ²) gives SSR =
+   8.79×10⁻⁶ vs. tongue-width SSR = 4.18×10⁻⁵. Even trivially, a Gaussian
+   phase-error model outperforms our prediction on these 3 data points.
+
+2. **K/2 = 1.09 — self-contradictory.** The fit requires K/2 > 1. The Arnold
+   tongue width formula (K/2)^q is derived in the weak-coupling regime K ≪ 1.
+   At K/2 > 1, tongues overlap and the formula breaks down. Our prediction
+   requires parameter values where its own derivation is invalid.
+
+3. **Trivially underdetermined.** Three data points, two free parameters.
+   Any monotone decreasing function with 2 params fits near-perfectly:
+
+   ```
+     ℓ    Tongue  PhaseErr  Linear   Data
+     1    0.9531  0.9515    0.9530   0.950
+     5    0.9338  0.9366    0.9319   0.939
+     8    0.9143  0.9129    0.9161   0.912
+    15    0.8432  0.8214    0.8791    —
+   ```
+
+   The models only diverge at ℓ ≥ 10 where no data exists, but the K/2 > 1
+   problem kills the physical motivation regardless of extrapolation.
+
+**The efficiency drop is real** (Fathi et al. measured it) **but is explained
+by mundane phase-error accumulation** (charge-ℓ beam requires ℓ×2π phase
+ramp, so alignment sensitivity grows with ℓ). **Prediction withdrawn.**
 
 ### ~~P3: Vortex Array Stability from Farey Depth~~ [REMOVED]
 ~~Maximum stable array size at depth D: N_max = |F_D|.~~
@@ -326,8 +344,8 @@ Four new prediction leaves (Level 4) — **all have identified gaps**:
 
 - **`hawking-from-tongue-edge`** — T_H from rotation number gradient
   [BLOCKED: lattice → circle map reduction not performed]
-- **`combining-efficiency-scaling`** — η(ℓ) follows tongue-width decay
-  [CONFOUNDED: dimensional mismatch, alternative fits equally good]
+- **`combining-efficiency-scaling`** — ~~η(ℓ) follows tongue-width decay~~
+  [KILLED: phase-error fits 5x better; K/2=1.09 outside valid regime]
 - **`array-farey-stability`** — max stable array = Farey sequence length
   [REMOVED: zero supporting data, retained only as flagged research direction]
 - **`circuit-depth-sb-depth`** — circuit complexity = CF complexity
@@ -343,11 +361,9 @@ Four new prediction leaves (Level 4) — **all have identified gaps**:
    rotor / circle map, then T_H from tongue-edge gradient becomes testable.
    If the reduction fails, `analogue-horizon` should be demoted or removed.
 
-2. **Kill or save P2 (computational, quick):** Fit Paper 7's three efficiency
-   points to *both* η = 1-c·(K/2)^ℓ and η = exp(-σ²ℓ²). If the fits are
-   indistinguishable (likely), this prediction is dead in its current form.
-   To revive it, one would need ≥6 data points across ℓ = 1..10 *and* a
-   physical argument for why tongue width governs combining efficiency.
+2. ~~**Kill or save P2:**~~ **DONE — killed.** Phase-error model fits 5x
+   better; tongue model requires K/2 = 1.09 (outside valid regime).
+   Prediction withdrawn. See computation above.
 
 3. **Unblock P4 (theoretical, hard):** Investigate whether the point-vortex
    Hamiltonian used by Wang et al. has a rotation-number structure in its
