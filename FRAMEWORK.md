@@ -57,10 +57,10 @@ every positive rational number appears **exactly once**, in lowest terms,
 in its natural order. The integers and the mediant operation are sufficient
 to enumerate all rationals. Nothing else is needed.
 
-**Why this matters:** the Stern-Brocot tree is not an arbitrary enumeration.
-It is the *unique* binary tree of rationals with the property that every
-fraction's ancestors are its best rational approximants. The tree IS the
-structure of rational approximation.
+The Stern-Brocot tree is not an arbitrary enumeration.
+It is the unique binary tree of rationals with the property that every
+fraction's ancestors are its best rational approximants. The tree encodes
+the structure of rational approximation.
 
 Reference: Graham, Knuth & Patashnik, *Concrete Mathematics* (1994), §4.5.
 
@@ -77,10 +77,10 @@ Every real number x has a continued fraction expansion:
 written [a₀; a₁, a₂, a₃, ...]. The partial quotients a₀, a₁, a₂, ...
 are positive integers (except a₀ which may be 0 or negative).
 
-**Key fact:** truncating the continued fraction at depth n gives the
+Truncating the continued fraction at depth n gives the
 convergent pₙ/qₙ, and the sequence of convergents p₀/q₀, p₁/q₁, p₂/q₂, ...
 traces a path down the Stern-Brocot tree. The continued fraction expansion
-and the Stern-Brocot address are **two notations for the same object**.
+and the Stern-Brocot address are two notations for the same object.
 
 - **Rationals** have finite continued fractions. They terminate. They are
   nodes at finite depth in the tree.
@@ -88,18 +88,18 @@ and the Stern-Brocot address are **two notations for the same object**.
   They are infinite paths through the tree — limits of sequences of rationals,
   never reached exactly.
 
-The **golden ratio** φ = [1; 1, 1, 1, ...] has all partial quotients equal
+The golden ratio φ = [1; 1, 1, 1, ...] has all partial quotients equal
 to 1. This makes its convergents (1/1, 2/1, 3/2, 5/3, 8/5, 13/8, ...)
 the slowest to converge of any continued fraction. In a precise sense,
-φ is the **most irrational** number: the hardest to approximate by rationals,
-the deepest path through the tree that avoids settling near any rational.
+φ is the most poorly approximable irrational: the hardest to approximate
+by rationals, the deepest path through the tree that avoids settling near
+any rational.
 
-**What irrationals describe:** a rational number p/q represents a pattern
-that repeats after q steps. An irrational represents a pattern that never
-repeats — but the continued fraction tells you *how close* it comes to
-repeating at each depth. The partial quotients measure the degree of
-near-repetition. Small partial quotients mean "almost periodic"; large
-ones mean "far from any period."
+A rational number p/q represents a pattern that repeats after q steps.
+An irrational represents a pattern that never repeats, but the continued
+fraction tells you how close it comes to repeating at each depth. The
+partial quotients measure the degree of near-repetition. Small partial
+quotients mean "almost periodic"; large ones mean "far from any period."
 
 Reference: Hardy & Wright, *An Introduction to the Theory of Numbers*
 (6th ed., 2008), Chapters 10–11.
@@ -141,8 +141,8 @@ So at K = 0, the Stern-Brocot tree classifies all possible orbit types:
 each rational p/q in the tree corresponds to a distinct periodic orbit,
 and the irrationals (infinite paths) correspond to quasiperiodic orbits.
 
-**What we can observe at K = 0:** periodic and quasiperiodic motion. Clocks.
-Planetary orbits (approximately). Uncoupled oscillators. The Stern-Brocot
+At K = 0, one observes periodic and quasiperiodic motion: clocks,
+planetary orbits (approximately), uncoupled oscillators. The Stern-Brocot
 tree is a catalog of all possible periods and near-periods.
 
 At this stage there is no coupling, so the tree classifies orbits without affecting them.
