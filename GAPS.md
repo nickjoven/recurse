@@ -76,16 +76,11 @@ requirement that the fold measure μ = arccos(1/K)/π match the known
 Bragg gap width Δω/ω = (4/π)arcsin(|r|) in the small-contrast limit.
 The fold measure reproduces the Bragg gap to within 1% for Δn < 0.2.
 
-**Resolved (2D):** For high-contrast 2D photonic crystals (Pryamikov's
-system, arXiv:2601.21704), the perturbative K-mapping breaks down. Instead,
-K_stat is calibrated directly from the band gap width by inverting the
-fold measure: K_stat = 1/cos(π · Δω/ω_mid). The spatial extent of reversed
-Poynting vector flow is then r_c = √(μ/π) · a, where μ = Δω/ω_mid and a
-is the lattice constant. For both canonical geometries (square lattice of
-alumina rods in air, ε = 8.9, r/a = 0.2; triangular lattice of air holes
-in dielectric, ε = 13, r/a = 0.48), the predicted r_c falls within the
-observed range: 0.299a vs 0.25–0.35a (Geom A) and 0.226a vs 0.15–0.25a
-(Geom B). See `notebooks/03_pryamikov_extraction.py`.
+**Resolved (2D):** For high-contrast systems, K_stat = 1/cos(π · Δω/ω_mid)
+by fold-measure inversion. The reversed-flow radius r_c = √(μ/π) · a
+falls within the observed range for both of Pryamikov's geometries
+(0.299a vs 0.25–0.35a; 0.226a vs 0.15–0.25a).
+See `notebooks/03_pryamikov_extraction.py`.
 
 ---
 
@@ -168,12 +163,8 @@ of the OAM spectrum, or a fundamentally different identification of
 | 3 (quantum cost) | Width ~ 0.458^depth; iterative QPE O(d) | Resolved: advantage is in frequency resolution |
 | 4 (OAM) | SB-adjacent tongues overlap first at K~1.5 | Open: 1D map insufficient for distant charges |
 
-Three questions are resolved (band gap K-mapping for 1D and 2D, quantum
-advantage clarified), one has theoretical values fixed awaiting experimental
-comparison (velocity exponent), and one remains open (distant OAM
-switching requires higher-dimensional maps).
+Resolved: §2 (band gap, 1D and 2D), §3 (quantum cost).
+Theoretical: §1 (velocity exponent, awaits data).
+Open: §4 (OAM, requires higher-dimensional maps).
 
-For the gravity sector, this mapping is derived: K(x,x') = G_γ(x,x')
-(the Green's function of the spatial Laplacian), via the Kuramoto-Einstein
-dictionary (`proslambenomenos/kuramoto_einstein_mapping.md`). For the
-vortex systems above, the analogous derivation has not been performed.
+Gravity sector: K(x,x') = G_γ(x,x') via Kuramoto-Einstein dictionary.

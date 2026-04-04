@@ -1,34 +1,12 @@
 """
-Parameter Extraction from Pryamikov's 2D Photonic Crystal Geometries
-====================================================================
+Pryamikov parameter extraction (arXiv:2601.21704).
 
-Extracts Δn, f, Q from the two canonical 2D photonic crystal geometries
-studied in Pryamikov (arXiv:2601.21704, Figs. 3–5), computes the predicted
-spatial extent of reversed Poynting vector flow, and compares to observations.
+K_stat = 1/cos(π Δω/ω_mid)  from fold-measure inversion.
+r_c = √(μ/π) · a            reversed-flow fraction as disk in unit cell.
 
-The two geometries (standard benchmarks, Joannopoulos et al. 2008):
-  A. Square lattice of dielectric rods in air:  ε = 8.9, r/a = 0.2  (TM gap)
-  B. Triangular lattice of air holes in dielectric: ε = 13, r/a = 0.48 (TE gap)
-
-Key insight: In a photonic crystal, the "reversed flow region" is not a
-single-vortex critical radius. It is the portion of each unit cell where
-the Poynting vector reverses due to coherent backscattering. The fold
-measure μ = arccos(1/K)/π gives this fraction directly. Approximating
-the reversed-flow region as a disk within the unit cell:
-
-    r_c = √(μ / π) · a
-
-where a is the lattice constant. This is a parameter-free prediction
-once K_stat is determined from the band gap width:
-
-    K_stat = 1 / cos(π · Δω/ω_mid)
-
-References
-----------
-- Pryamikov, arXiv:2601.21704 (2026): reverse energy flows in 2D PhC
-- Joannopoulos et al., Photonic Crystals: Molding the Flow of Light (2008)
-- STRIBECK_VORTEX.html: regime map framework
-- GAPS.md §2: fold measure = band gap criterion
+Two geometries:
+  A. ε=8.9 rods in air, r/a=0.2, TM  →  r_c = 0.299a  (obs 0.25–0.35a)
+  B. ε=13 holes in diel., r/a=0.48, TE  →  r_c = 0.226a  (obs 0.15–0.25a)
 """
 
 import numpy as np
@@ -37,9 +15,7 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 
-# ============================================================================
-# 1. GEOMETRY DEFINITIONS
-# ============================================================================
+# --- Geometry definitions ---
 
 GEOM_A = {
     'name': 'Square lattice, rods in air',
@@ -68,9 +44,7 @@ GEOM_B = {
 }
 
 
-# ============================================================================
-# 2. PARAMETER EXTRACTION
-# ============================================================================
+# --- Parameter extraction ---
 
 def extract_parameters(geom):
     """
@@ -139,9 +113,7 @@ def extract_parameters(geom):
     }
 
 
-# ============================================================================
-# 3. FOLD MEASURE PROFILE
-# ============================================================================
+# --- Fold measure ---
 
 def fold_measure(K):
     """μ(K) = arccos(1/K)/π for K > 1, else 0."""
@@ -157,9 +129,7 @@ def stribeck_K(v, K_stat, K_kin, v_thr):
     return K_kin + (K_stat - K_kin) * np.exp(-(np.abs(v) / v_thr)**2)
 
 
-# ============================================================================
-# 4. MAIN COMPUTATION
-# ============================================================================
+# --- Main ---
 
 def run():
     print("=" * 72)
@@ -179,51 +149,15 @@ def run():
         obs_min, obs_max = geom['r_rev_obs']
         obs_mid = (obs_min + obs_max) / 2
 
-        print(f"\n{'—' * 72}")
-        print(f"GEOMETRY {label}: {geom['name']}")
-        print(f"{'—' * 72}")
-        print(f"  Lattice:         {geom['lattice']}")
-        print(f"  ε_rod = {geom['epsilon_rod']},  ε_bg = {geom['epsilon_bg']}")
-        print(f"  n_rod = {p['n_rod']:.4f},  n_bg = {p['n_bg']:.4f}")
-        print(f"  r/a = {geom['r_over_a']}")
-        print(f"  Polarization:    {geom['polarization']}")
-        print(f"  Δω/ω_mid =      {geom['gap_midgap']}")
+        print(f"\n{label}: {geom['name']}")
+        print(f"  ε={geom['epsilon_rod']}, r/a={geom['r_over_a']}, "
+              f"{geom['polarization']}, Δω/ω={geom['gap_midgap']}")
+        print(f"  Δn={p['delta_n']:.3f}  f={p['f']:.3f}  "
+              f"K={p['K_stat']:.3f}  μ={p['mu']:.3f}")
+        print(f"  r_c = {p['r_c']:.3f} a   (obs {obs_min}–{obs_max} a)")
         print()
-        print(f"  Extracted parameters:")
-        print(f"    Δn     = {p['delta_n']:.4f}")
-        print(f"    f      = {p['f']:.4f}")
-        print(f"    Q      = {p['Q']:.1f}")
-        print(f"    n_eff  = {p['n_eff']:.4f}")
-        print()
-        print(f"  Stribeck coupling (from gap inversion):")
-        print(f"    K_stat = {p['K_stat']:.4f}")
-        print(f"    μ(0)   = {p['mu']:.4f} ({p['mu']*100:.1f}% reversed)")
-        print()
-        print(f"  Predicted r_c = √(μ/π) · a = {p['r_c']:.4f} a")
-        print(f"  Observed extent: {obs_min}–{obs_max} a (mid = {obs_mid} a)")
-        print()
-
-        in_range = obs_min <= p['r_c'] <= obs_max
-        deviation = abs(p['r_c'] - obs_mid) / obs_mid * 100
-        if in_range:
-            print(f"  ✓ Predicted r_c falls within observed range")
-            print(f"    ({deviation:.0f}% from midpoint)")
-        else:
-            direction = "below" if p['r_c'] < obs_min else "above"
-            print(f"    {deviation:.0f}% {direction} midpoint")
 
         results[label] = p
-
-        # ℓ-dependence: for charge-ℓ vortex, the reversed-flow region
-        # splits into ℓ sub-vortices, each with fraction μ/ℓ of the cell
-        print()
-        print(f"  ℓ-dependence (sub-vortex prediction):")
-        print(f"  {'ℓ':>5}  {'r_c/a':>10}  {'r_c/r_rod':>12}")
-        print(f"  {'-'*32}")
-        for ell in [1, 2, 3, 5]:
-            rc_ell = p['r_c'] / np.sqrt(ell)
-            r_rod = geom['r_over_a']
-            print(f"  {ell:>5}  {rc_ell:>10.4f}  {rc_ell/r_rod:>12.2f}")
 
     # ========================================================================
     # FIGURE
@@ -231,9 +165,7 @@ def run():
 
     fig, axes = plt.subplots(2, 2, figsize=(14, 10))
     fig.suptitle(
-        "Pryamikov Parameter Extraction: Predicted vs Observed "
-        "Reversed Poynting Vector Flow\n"
-        "arXiv:2601.21704 — $K_{\\rm stat}$ calibrated from band gap width",
+        "Predicted vs Observed Reversed Poynting Vector Flow",
         fontsize=13, y=0.99)
 
     # Panel (a): Bar chart comparison
@@ -339,51 +271,7 @@ def run():
     plt.close()
     print(f"\nSaved: notebooks/pryamikov_extraction.png")
 
-    # ========================================================================
-    # SUMMARY
-    # ========================================================================
-
-    print(f"\n{'=' * 72}")
-    print("SUMMARY")
-    print(f"{'=' * 72}")
-
-    for lb in ['A', 'B']:
-        p = results[lb]
-        geom = GEOM_A if lb == 'A' else GEOM_B
-        obs_min, obs_max = geom['r_rev_obs']
-        obs_mid = (obs_min + obs_max) / 2
-
-        print(f"\nGeometry {lb} ({geom['name']}):")
-        print(f"  ε = {geom['epsilon_rod']}, r/a = {geom['r_over_a']}, "
-              f"{geom['polarization']} polarization")
-        print(f"  Extracted: Δn = {p['delta_n']:.4f}, "
-              f"f = {p['f']:.4f}, Q = {p['Q']:.0f}")
-        print(f"  K_stat = {p['K_stat']:.4f} "
-              f"(from Δω/ω_mid = {geom['gap_midgap']})")
-        print(f"  μ = {p['mu']:.4f} "
-              f"({p['mu']*100:.1f}% of unit cell has reversed flow)")
-        print(f"  Predicted r_c = {p['r_c']:.4f} a")
-        print(f"  Observed extent = {obs_min}–{obs_max} a")
-        in_range = obs_min <= p['r_c'] <= obs_max
-        if in_range:
-            print(f"  ✓ Agreement: predicted r_c within observed range")
-
-    print(f"""
-The prediction chain is:
-
-  Δω/ω_mid  →  μ = Δω/ω_mid  →  K_stat = 1/cos(πμ)  →  r_c = √(μ/π) · a
-
-This gives a parameter-free prediction for the spatial extent of reversed
-Poynting vector flow in each unit cell, requiring only the band gap width
-as input. For both of Pryamikov's canonical geometries, the predicted r_c
-falls within the observed range.
-
-The ℓ-dependence follows from vortex splitting: a charge-ℓ vortex splits
-into ℓ sub-vortices, each with reversed-flow radius r_c/√ℓ.
-
-Gravity sector: K(x,x') = G_γ(x,x') via the Kuramoto–Einstein dictionary
-is confirmed complete (proslambenomenos/kuramoto_einstein_mapping.md).
-""")
+    print()
 
 
 if __name__ == "__main__":

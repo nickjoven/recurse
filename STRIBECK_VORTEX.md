@@ -11,18 +11,6 @@ critical radius r_c where K(r_c) = 1, separating an overcritical core
 from a subcritical exterior. The fold measure mu(r) = arccos(1/K(r))/pi
 gives the local fraction of reversed energy flow at each radius.
 
-## Context
-
-This document condenses results from:
-
-- `FRAMEWORK.md` §1-10 — circle map grammar, K regimes, Kuramoto-Einstein dictionary
-- `VORTEX_UNIFICATION.md` §2B, §3, §4 — singularity and energy flow papers, status classification, open questions
-- `GAPS.md` §2 — photonic band gap criterion, fold measure computation
-- `notebooks/01_stribeck_vortex_regime.ipynb` — full computation with figures
-- `harmonics/driven_stribeck.py` — Stribeck friction implementation
-- `harmonics/sync_cost/derivations/` — 39 derivations, proof chains A and B
-- `proslambenomenos/kuramoto_einstein_mapping.md` — Kuramoto-Einstein dictionary
-
 ## Setup
 
 The standard circle map on S^1:
@@ -101,31 +89,25 @@ These hold for any Stribeck parameters with K_static > 1:
 2. The extent of reversed flow shrinks monotonically with l.
 3. The fold measure peaks at the center and decays to zero at r_c.
 
-## Pryamikov comparison — Resolved
+## 2D photonic crystal
 
-For Pryamikov's 2D photonic crystal (arXiv 2601.21704), the perturbative
-K-mapping (K = 1 + 2(Δn)²) is invalid for high-contrast systems. Instead,
-K_stat is calibrated from the band gap width via fold-measure inversion:
+For high-contrast systems, K_stat is calibrated from the band gap
+width via fold-measure inversion:
 
     K_stat = 1 / cos(π · Δω/ω_mid)
 
-The spatial extent of reversed Poynting vector flow:
+The fraction μ = Δω/ω_mid of each unit cell carries reversed flow:
 
-    r_c = sqrt(μ / π) · a,    μ = Δω/ω_mid
-
-Results for Pryamikov's two canonical geometries:
+    r_c = sqrt(μ / π) · a
 
 | Geometry          | ε    | r/a  | Pol | K_stat | μ     | r_c/a (pred) | r_c/a (obs)  |
 |-------------------|------|------|-----|--------|-------|--------------|--------------|
-| A: rods in air    | 8.9  | 0.20 | TM  | 1.575  | 0.281 | 0.299        | 0.25–0.35    |
-| B: holes in diel. | 13   | 0.48 | TE  | 1.199  | 0.186 | 0.226        | 0.15–0.25    |
+| Rods in air       | 8.9  | 0.20 | TM  | 1.575  | 0.281 | 0.299        | 0.25–0.35    |
+| Holes in diel.    | 13   | 0.48 | TE  | 1.199  | 0.186 | 0.226        | 0.15–0.25    |
 
-Both predictions fall within the observed range. See
-`notebooks/03_pryamikov_extraction.py`.
-
-For the gravity sector, the analogous K-derivation is complete: K(x,x') =
-G_gamma(x,x') via the Kuramoto-Einstein dictionary
-(`proslambenomenos/kuramoto_einstein_mapping.md`).
+Both predictions fall within the observed range [1].
+Gravity sector: K(x,x') = G_gamma(x,x') via the Kuramoto-Einstein
+dictionary.
 
 ## References
 
