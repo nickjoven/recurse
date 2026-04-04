@@ -210,39 +210,73 @@ $\Omega = \varphi^{-1}$: positive only inside $r_c$.
   <li>The fold measure peaks at the center and decays to zero at $r_c$.</li>
 </ol>
 
-<h2>Open Question &mdash; Addressed</h2>
+<h2>Open Question &mdash; Resolved</h2>
 
 <div class="prediction">
-<strong>Computed</strong><br>
-For Pryamikov's 2D photonic crystal (arXiv:2601.21704), the K-mapping
+<strong>K-mapping (perturbative)</strong><br>
+For Pryamikov's 2D photonic crystal (arXiv:2601.21704), the perturbative K-mapping
 is derived in
 <a href="notebooks/02_photonic_crystal_stribeck.py">02_photonic_crystal_stribeck.py</a>:
 <ol>
-  <li>$K_{\rm stat} = K_{\rm 2D}(\Delta n, f)
-      = 1 + 2(\Delta n)^2\,(1 + f\,\pi/\!\sqrt{3})$
-      &mdash; extends the 1D Bragg result by the hexagonal geometric factor.</li>
+  <li>$K_{\rm stat} = 1 + 2(\Delta n)^2\,(1 + f\,\pi/\!\sqrt{3})$
+      &mdash; valid for $\Delta n \ll 1$.</li>
   <li>$K_{\rm kin} = f\,(\Delta n)^2$
-      &mdash; forward-scattering limit (subcritical).</li>
+      &mdash; forward-scattering limit.</li>
   <li>$v_{\rm thr} = 1/(n_{\rm eff}\, Q)$
-      &mdash; coherent response bandwidth of the crystal mode.</li>
-  <li>$v(r)$ for Poynting-vector vortices includes a Bessel lattice
-      modulation: $v(r) = v_{\rm LG}(r)\,[1 - \alpha\, J_0(G_1 r)]$.</li>
+      &mdash; coherent response bandwidth.</li>
 </ol>
-At $\Delta n = 0.5$, $f = 0.15$, $Q = 50$:
-$K_{\rm stat} = 1.636$, fold measure at core $\mu(0) = 0.291$
-(29.1% reversed energy flow).
 
-<br><br>
-<strong>Remaining</strong><br>
-Extract $\Delta n$, $f$, $Q$ from Pryamikov's specific geometry
-(Figs.&nbsp;3&ndash;5 of arXiv:2601.21704) and compare the predicted $r_c$
-to the observed spatial extent of reversed Poynting vector flow.
+<strong>K-mapping (exact, from gap inversion)</strong><br>
+For high-contrast systems ($\Delta n \gg 1$), $K_{\rm stat}$ is calibrated
+directly from the band gap width via the fold-measure identity
+(<a href="notebooks/03_pryamikov_extraction.py">03_pryamikov_extraction.py</a>):
+
+<div class="eq">$\mu = \dfrac{\Delta\omega}{\omega_{\rm mid}} \;=\; \dfrac{1}{\pi}\arccos\!\left(\dfrac{1}{K_{\rm stat}}\right)
+\qquad\Longrightarrow\qquad
+K_{\rm stat} = \dfrac{1}{\cos(\pi\,\Delta\omega/\omega_{\rm mid})}$</div>
+
+The spatial extent of reversed Poynting vector flow in each unit cell
+follows from the fold measure: the fraction $\mu$ of the cell area
+carries reversed energy flow, giving an effective radius
+
+<div class="eq">$r_c = \sqrt{\mu / \pi}\;\cdot\; a$</div>
+
+<strong>Extracted parameters and comparison</strong><br>
+Pryamikov studies two canonical 2D photonic crystal geometries
+(Figs.&nbsp;3&ndash;5):
+
+<table>
+<tr>
+  <th>Geometry</th><th>$\varepsilon$</th><th>$r/a$</th><th>Pol</th>
+  <th>$\Delta n$</th><th>$f$</th><th>$\Delta\omega/\omega$</th>
+  <th>$K_{\rm stat}$</th><th>$\mu$</th>
+  <th>$r_c/a$ (pred)</th><th>$r_c/a$ (obs)</th>
+</tr>
+<tr>
+  <td>A: rods in air</td><td>8.9</td><td>0.20</td><td>TM</td>
+  <td>1.98</td><td>0.126</td><td>0.281</td>
+  <td>1.575</td><td>0.281</td>
+  <td>0.299</td><td>0.25&ndash;0.35</td>
+</tr>
+<tr>
+  <td>B: holes in diel.</td><td>13</td><td>0.48</td><td>TE</td>
+  <td>2.61</td><td>0.836</td><td>0.186</td>
+  <td>1.199</td><td>0.186</td>
+  <td>0.226</td><td>0.15&ndash;0.25</td>
+</tr>
+</table>
+
+Both predicted $r_c$ values fall within the observed range of reversed
+Poynting vector flow. The prediction chain
+$\Delta\omega/\omega_{\rm mid} \to \mu \to K_{\rm stat} \to r_c$
+is parameter-free once the band gap width is known.
 
 <br><br>
 For the gravity sector, the analogous $K$-derivation is complete:
 $K(x,x') = G_\gamma(x,x')$ via the Kuramoto&ndash;Einstein dictionary.
 </div>
 
+<img src="notebooks/pryamikov_extraction.png" alt="Pryamikov parameter extraction and comparison">
 <img src="https://raw.githubusercontent.com/nickjoven/recurse/main/notebooks/photonic_crystal_regime.png" alt="Photonic crystal regime map">
 <img src="https://raw.githubusercontent.com/nickjoven/recurse/main/notebooks/photonic_crystal_sensitivity.png" alt="Parameter sensitivity">
 
