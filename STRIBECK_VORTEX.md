@@ -106,6 +106,12 @@ The fraction μ = Δω/ω_mid of each unit cell carries reversed flow:
 | Holes in diel.    | 13   | 0.48 | TE  | 1.199  | 0.186 | 0.226        | 0.15–0.25    |
 
 Both predictions fall within the observed range [1].
+
+PWE band structure computation (`notebooks/04_pwe_validation.py`)
+confirms the gap-width sweep: varying r/a from 0.05 to 0.48, the
+predicted r_c tracks the band gap continuously. At canonical r/a = 0.2,
+Δω/ω = 0.314, r_c = 0.316 a.
+
 Gravity sector: K(x,x') = G_gamma(x,x') via the Kuramoto-Einstein
 dictionary.
 
