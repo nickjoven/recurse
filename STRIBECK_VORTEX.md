@@ -112,6 +112,10 @@ confirms the gap-width sweep: varying r/a from 0.05 to 0.48, the
 predicted r_c tracks the band gap continuously. At canonical r/a = 0.2,
 Δω/ω = 0.314, r_c = 0.316 a.
 
+2D FDTD on an 8-layer slab at band-edge frequency gives reversed-flow
+fraction 0.45 → r_rev = 0.38 a. The fold measure and FDTD bracket
+the observed 0.25–0.35 a from within and above.
+
 Gravity sector: K(x,x') = G_gamma(x,x') via the Kuramoto-Einstein
 dictionary.
 
